@@ -5,14 +5,14 @@ import Link from "next/link";
 import { Button, buttonStyles, focusRing } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { QuantityInput } from "@/features/cart/components/quantity-input";
-import { useCartHydrated } from "@/features/cart/hooks/use-cart-hydrated";
 import { cartSummary } from "@/features/cart/lib/cart";
+import { usePersistHydrated } from "@/hooks/use-persist-hydrated";
 import { cn } from "@/lib/cn";
 import { formatRupiah } from "@/lib/format";
 import { useCartStore } from "@/stores/cart-store";
 
 export function CartView() {
-  const hydrated = useCartHydrated();
+  const hydrated = usePersistHydrated(useCartStore);
   const items = useCartStore((s) => s.items);
   const setQuantity = useCartStore((s) => s.setQuantity);
   const removeItem = useCartStore((s) => s.removeItem);

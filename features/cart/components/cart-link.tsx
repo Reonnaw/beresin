@@ -3,12 +3,12 @@
 import Link from "next/link";
 
 import { buttonStyles } from "@/components/ui/button";
-import { useCartHydrated } from "@/features/cart/hooks/use-cart-hydrated";
 import { cartSummary } from "@/features/cart/lib/cart";
+import { usePersistHydrated } from "@/hooks/use-persist-hydrated";
 import { useCartStore } from "@/stores/cart-store";
 
 export function CartLink() {
-  const hydrated = useCartHydrated();
+  const hydrated = usePersistHydrated(useCartStore);
   const count = useCartStore((s) => cartSummary(s.items).count);
 
   return (

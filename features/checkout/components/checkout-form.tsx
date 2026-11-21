@@ -6,14 +6,14 @@ import { useActionState } from "react";
 import { Button, buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Field, inputStyles } from "@/components/ui/field";
-import { useCartHydrated } from "@/features/cart/hooks/use-cart-hydrated";
 import { cartSummary } from "@/features/cart/lib/cart";
 import { type CheckoutState, placeOrder } from "@/features/checkout/actions";
+import { usePersistHydrated } from "@/hooks/use-persist-hydrated";
 import { formatRupiah } from "@/lib/format";
 import { useCartStore } from "@/stores/cart-store";
 
 export function CheckoutForm() {
-  const hydrated = useCartHydrated();
+  const hydrated = usePersistHydrated(useCartStore);
   const items = useCartStore((s) => s.items);
   const [state, formAction, pending] = useActionState<CheckoutState, FormData>(placeOrder, {});
 

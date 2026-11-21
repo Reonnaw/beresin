@@ -17,6 +17,9 @@ type ModuleLayout = {
   parts: ModulePart[];
 };
 
+/** Seeded laptop series the procedural model represents. */
+export const WORKBENCH_MODEL_SLUG = "modular-13";
+
 /** World units a module travels at explode = 1 along a direction of length 1. */
 export const EXPLODE_DISTANCE = 1.2;
 

@@ -9,6 +9,7 @@ import { cn } from "@/lib/cn";
 const NAV_ITEMS = [
   { href: "/", label: "Workbench" },
   { href: "/spare-parts", label: "Spare Part" },
+  { href: "/service/book", label: "Booking Servis" },
 ] as const;
 
 /** Pathname is request data, so the header renders <NavLinks pathname={null} /> until it resolves. */
