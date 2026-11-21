@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { focusRing } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { AddToCartButton } from "@/features/cart/components/add-to-cart-button";
+import { toCartProduct } from "@/features/cart/lib/cart";
 import { StockBadge } from "@/features/spare-parts/components/stock-badge";
 import { MODULE_LABELS } from "@/lib/constants/modules";
 import { cn } from "@/lib/cn";
@@ -35,6 +37,8 @@ export function SparePartCard({ part }: { part: SparePartWithModel }) {
       <p className="border-t border-border pt-3 font-mono text-lg font-semibold">
         {formatRupiah(part.price)}
       </p>
+      {/* z-10 lifts the button above the card's stretched link. */}
+      <AddToCartButton product={toCartProduct(part)} className="relative z-10" />
     </Card>
   );
 }

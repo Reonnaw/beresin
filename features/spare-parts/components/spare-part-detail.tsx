@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 
 import { Card } from "@/components/ui/card";
+import { AddToCartButton } from "@/features/cart/components/add-to-cart-button";
+import { toCartProduct } from "@/features/cart/lib/cart";
 import { getDiagnosticIssues } from "@/features/diagnostic/services/diagnostic-service";
 import { StockBadge } from "@/features/spare-parts/components/stock-badge";
 import { getSparePartBySku } from "@/features/spare-parts/services/spare-part-service";
@@ -52,6 +54,7 @@ export async function SparePartDetail({ params }: { params: Promise<{ sku: strin
           <StockBadge stock={part.stock} />
         </div>
         <p className="font-mono text-2xl font-semibold">{formatRupiah(part.price)}</p>
+        <AddToCartButton product={toCartProduct(part)} />
       </Card>
     </div>
   );
