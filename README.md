@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Beresin
 
-## Getting Started
+Diagnostik kerusakan laptop modular dalam 3D. Pengguna membongkar laptop per modul, memilih gejala kerusakan, membeli spare part, dan booking servis.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Supabase (Postgres, Auth, RLS) · React Three Fiber + drei · Zustand
+
+## Menjalankan
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env.local   # isi URL dan anon key dari Supabase Dashboard > Project Settings > API
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Script | Fungsi |
+| --- | --- |
+| `pnpm dev` | Dev server |
+| `pnpm build` | Build produksi |
+| `pnpm lint` | ESLint |
+| `pnpm typecheck` | Cek tipe TypeScript |
+| `pnpm db:types` | Generate ulang `types/database.ts` dari project Supabase yang sudah di-link (`supabase link`) |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Struktur
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/                 Route, layout, dan boundary (error, not-found)
+components/layout/   Shell aplikasi (header)
+lib/env.ts           Validasi environment variable
+lib/supabase/        Client browser, server, dan helper proxy session
+lib/constants/       Label modul dan tingkat kerusakan
+lib/format.ts        Format Rupiah dan tanggal (Asia/Jakarta)
+types/database.ts    Tipe skema Supabase
+types/domain.ts      Tipe domain (alias row, snapshot diagnosis)
+proxy.ts             Refresh session Supabase di setiap request
+```
 
-## Learn More
+## Konvensi
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Client Supabase server dibuat per request lewat `createClient()` di `lib/supabase/server.ts`, jangan dibagi antar request.
+- Harga disimpan sebagai integer Rupiah penuh.
+- Commit mengikuti [Conventional Commits](https://www.conventionalcommits.org/).
