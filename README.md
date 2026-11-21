@@ -17,7 +17,8 @@ pnpm dev
 Jalankan skema lalu data contoh di project Supabase, lewat SQL Editor atau Supabase CLI:
 
 1. `supabase/migrations/20261121000000_init_schema.sql`: enum, tabel, trigger, RLS, dan fungsi `place_order`.
-2. `supabase/seed.sql`: dua seri laptop, daftar kerusakan, dan katalog spare part.
+2. `supabase/migrations/20261121000001_grant_api_roles.sql`: hak akses tabel untuk role `anon` dan `authenticated`.
+3. `supabase/seed.sql`: dua seri laptop, daftar kerusakan, dan katalog spare part.
 
 Dengan CLI yang sudah di-link: `supabase db push`, lalu jalankan `seed.sql`. Untuk menjadikan akun teknisi atau admin, ubah `profiles.role` dari dashboard.
 
