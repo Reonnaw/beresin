@@ -1,15 +1,12 @@
 "use client";
 
-import { Edges, OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
-import { LaptopModule } from "@/features/workbench/components/laptop-module";
-import { CHASSIS } from "@/features/workbench/lib/module-layout";
-import { MODULE_TYPES } from "@/lib/constants/modules";
+import { LaptopAssembly } from "@/features/workbench/components/laptop-assembly";
 import { useWorkbenchStore } from "@/stores/workbench-store";
 
 export default function WorkbenchScene() {
-  const hiddenModules = useWorkbenchStore((s) => s.hiddenModules);
   const selectModule = useWorkbenchStore((s) => s.selectModule);
 
   return (
@@ -25,14 +22,7 @@ export default function WorkbenchScene() {
       {/* Cutting-mat grid in the panel border and secondary surface tones. */}
       <gridHelper args={[12, 24, "#D8D6CE", "#ECEAE2"]} position-y={-0.001} />
 
-      <mesh position={CHASSIS.position}>
-        <boxGeometry args={CHASSIS.size} />
-        <meshStandardMaterial color="#B8B6AE" roughness={0.7} metalness={0.2} />
-        <Edges color="#1A1B1E" />
-      </mesh>
-      {MODULE_TYPES.filter((type) => !hiddenModules.includes(type)).map((type) => (
-        <LaptopModule key={type} type={type} />
-      ))}
+      <LaptopAssembly />
 
       <OrbitControls
         makeDefault
