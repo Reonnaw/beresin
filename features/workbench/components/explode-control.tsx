@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useWorkbenchStore } from "@/stores/workbench-store";
 
 export function ExplodeControl() {
@@ -26,13 +27,9 @@ export function ExplodeControl() {
         onChange={(event) => setExplode(Number(event.target.value) / 100)}
         className="w-full accent-accent"
       />
-      <button
-        type="button"
-        onClick={reset}
-        className="self-start rounded-[4px] border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      >
+      <Button variant="secondary" size="sm" onClick={reset} className="self-start">
         Rakit ulang
-      </button>
+      </Button>
     </section>
   );
 }

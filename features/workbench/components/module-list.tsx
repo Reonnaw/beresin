@@ -1,5 +1,7 @@
 "use client";
 
+import { focusRing } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 import { MODULE_LABELS, MODULE_TYPES } from "@/lib/constants/modules";
 import { useWorkbenchStore } from "@/stores/workbench-store";
 
@@ -20,7 +22,10 @@ export function ModuleList() {
           return (
             <li
               key={type}
-              className={`flex items-center gap-3 border-l-2 px-3 py-2 ${selected ? "border-l-accent bg-surface-muted" : "border-l-transparent"}`}
+              className={cn(
+                "flex items-center gap-3 border-l-2 px-3 py-2",
+                selected ? "border-l-accent bg-surface-muted" : "border-l-transparent",
+              )}
             >
               <input
                 type="checkbox"
@@ -34,7 +39,10 @@ export function ModuleList() {
                 disabled={hidden}
                 aria-pressed={selected}
                 onClick={() => selectModule(selected ? null : type)}
-                className="flex flex-1 items-baseline justify-between text-left text-sm disabled:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className={cn(
+                  "flex flex-1 items-baseline justify-between text-left text-sm disabled:text-muted",
+                  focusRing,
+                )}
               >
                 <span>{MODULE_LABELS[type]}</span>
                 <span className="font-mono text-xs text-muted">{type}</span>
