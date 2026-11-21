@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test": "node --test",
     "db:types": "pnpm dlx supabase gen types typescript --linked --schema public > types/database.ts"
   },
   "dependencies": {

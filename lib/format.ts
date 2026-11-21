@@ -24,3 +24,10 @@ export function formatCostRange(min: number, max: number): string {
 export function formatDateTime(value: string | Date): string {
   return dateTime.format(new Date(value));
 }
+
+export function formatDuration(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  if (hours === 0) return `${rest} mnt`;
+  return rest === 0 ? `${hours} jam` : `${hours} jam ${rest} mnt`;
+}

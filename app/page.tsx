@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
+import { DiagnosticSection } from "@/features/diagnostic/components/diagnostic-section";
 import { ExplodeControl } from "@/features/workbench/components/explode-control";
-import { ModuleInspector } from "@/features/workbench/components/module-inspector";
 import { ModuleList } from "@/features/workbench/components/module-list";
 import { WorkbenchCanvas } from "@/features/workbench/components/workbench-canvas";
 
@@ -15,7 +16,11 @@ export default function WorkbenchPage() {
       </section>
       <aside className="flex flex-col gap-6 border-t border-border bg-surface p-5 lg:overflow-y-auto lg:border-t-0 lg:border-l">
         <h1 className="text-xl font-semibold tracking-tight">Workbench</h1>
-        <ModuleInspector />
+        <Suspense
+          fallback={<p className="font-mono text-sm text-muted">Memuat data diagnostik…</p>}
+        >
+          <DiagnosticSection />
+        </Suspense>
         <ExplodeControl />
         <ModuleList />
       </aside>
