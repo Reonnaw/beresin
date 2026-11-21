@@ -8,6 +8,7 @@
 :root {
   --background: #f5f4f0;
   --surface: #ffffff;
+  --surface-muted: #eceae2;
   --border: #d8d6ce;
   --foreground: #1a1b1e;
   --muted: #5c6068;
@@ -22,6 +23,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
   --color-border: var(--border);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
