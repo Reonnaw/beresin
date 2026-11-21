@@ -31,3 +31,8 @@ export function formatDuration(minutes: number): string {
   if (hours === 0) return `${rest} mnt`;
   return rest === 0 ? `${hours} jam` : `${hours} jam ${rest} mnt`;
 }
+
+/** Human-friendly ticket code derived from a uuid. */
+export function formatShortId(id: string): string {
+  return id.slice(0, 8).toUpperCase();
+}

@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { requireUser } from "@/features/auth/services/auth-service";
 import { ClearCart } from "@/features/checkout/components/clear-cart";
 import { getOrder } from "@/features/checkout/services/order-service";
-import { formatDateTime, formatRupiah } from "@/lib/format";
+import { formatDateTime, formatRupiah, formatShortId } from "@/lib/format";
 import { firstParam } from "@/lib/search-params";
 
 export async function OrderConfirmation({
@@ -26,7 +26,7 @@ export async function OrderConfirmation({
         <p className="font-mono text-xs uppercase tracking-wide text-success">Pesanan dibuat</p>
         <h1 className="text-2xl font-semibold tracking-tight">Terima kasih!</h1>
         <p className="text-sm text-muted">
-          No. pesanan <span className="font-mono text-foreground">{order.id.slice(0, 8).toUpperCase()}</span>{" "}
+          No. pesanan <span className="font-mono text-foreground">{formatShortId(order.id)}</span>{" "}
           · {formatDateTime(order.created_at)}
         </p>
       </div>

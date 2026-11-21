@@ -14,3 +14,11 @@ export const BOOKING_STATUS_LABELS = {
   completed: "Selesai",
   cancelled: "Dibatalkan",
 } as const satisfies Record<BookingStatus, string>;
+
+/** Happy path a booking moves through; cancelled can happen at any step. */
+export const BOOKING_STATUS_FLOW = [
+  "pending",
+  "confirmed",
+  "in_progress",
+  "completed",
+] as const satisfies readonly BookingStatus[];

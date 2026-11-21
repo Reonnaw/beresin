@@ -41,3 +41,7 @@ export type DiagnosisSnapshot = {
 export type SparePartWithModel = SparePart & {
   laptop_models: Pick<LaptopModel, "name" | "slug"> | null;
 };
+
+export type ServiceBookingWithModel = ServiceBooking & {
+  laptop_models: Pick<LaptopModel, "name">;
+};
