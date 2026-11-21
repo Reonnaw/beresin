@@ -1,12 +1,16 @@
+import Link from "next/link";
+
+import { focusRing } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { StockBadge } from "@/features/spare-parts/components/stock-badge";
 import { MODULE_LABELS } from "@/lib/constants/modules";
+import { cn } from "@/lib/cn";
 import { formatRupiah } from "@/lib/format";
 import type { SparePartWithModel } from "@/types/domain";
 
 export function SparePartCard({ part }: { part: SparePartWithModel }) {
   return (
-    <Card className="flex flex-col gap-3 p-4">
+    <Card className="relative flex w-full flex-col gap-3 p-4 hover:border-muted">
       <div className="flex items-center justify-between gap-2">
         <span className="font-mono text-xs uppercase tracking-wide text-muted">
           {MODULE_LABELS[part.module_type]}
@@ -14,7 +18,15 @@ export function SparePartCard({ part }: { part: SparePartWithModel }) {
         <StockBadge stock={part.stock} />
       </div>
       <div className="flex flex-1 flex-col gap-1">
-        <h2 className="font-semibold leading-snug">{part.name}</h2>
+        <h2 className="font-semibold leading-snug">
+          {/* Stretched link: the whole card is clickable, one tab stop. */}
+          <Link
+            href={`/spare-parts/${encodeURIComponent(part.sku)}`}
+            className={cn("after:absolute after:inset-0", focusRing)}
+          >
+            {part.name}
+          </Link>
+        </h2>
         <p className="font-mono text-xs text-muted">{part.sku}</p>
       </div>
       <p className="text-xs text-muted">

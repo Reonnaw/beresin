@@ -11,13 +11,16 @@ const NAV_ITEMS = [
   { href: "/spare-parts", label: "Spare Part" },
 ] as const;
 
+/** Pathname is request data, so the header renders <NavLinks pathname={null} /> until it resolves. */
 export function MainNav() {
-  const pathname = usePathname();
+  return <NavLinks pathname={usePathname()} />;
+}
 
+export function NavLinks({ pathname }: { pathname: string | null }) {
   return (
     <nav aria-label="Navigasi utama" className="flex items-center gap-1">
       {NAV_ITEMS.map(({ href, label }) => {
-        const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+        const active = href === "/" ? pathname === "/" : !!pathname?.startsWith(href);
         return (
           <Link
             key={href}

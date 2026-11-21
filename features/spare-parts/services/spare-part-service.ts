@@ -28,3 +28,15 @@ export async function getSpareParts({ moduleType, modelId }: SparePartFilter = {
   if (error) throw new Error(`Gagal memuat spare part: ${error.message}`);
   return data satisfies SparePartWithModel[];
 }
+
+export async function getSparePartBySku(sku: string): Promise<SparePartWithModel | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("spare_parts")
+    .select(SPARE_PART_SELECT)
+    .eq("sku", sku)
+    .eq("is_active", true)
+    .maybeSingle();
+  if (error) throw new Error(`Gagal memuat spare part: ${error.message}`);
+  return data;
+}

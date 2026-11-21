@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { Suspense } from "react";
 
-import { MainNav } from "@/components/layout/main-nav";
+import { MainNav, NavLinks } from "@/components/layout/main-nav";
 import { focusRing } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 
@@ -14,7 +15,9 @@ export function SiteHeader() {
         >
           beresin<span className="text-accent">.</span>
         </Link>
-        <MainNav />
+        <Suspense fallback={<NavLinks pathname={null} />}>
+          <MainNav />
+        </Suspense>
       </div>
     </header>
   );
