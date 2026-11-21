@@ -109,7 +109,7 @@ export function BookingForm({ models, issues, defaultModelId }: BookingFormProps
         ) : estimate.issues.length === 0 ? (
           <p className="text-sm text-muted">
             Belum ada kerusakan yang dipilih. Teknisi akan memeriksa menyeluruh, atau{" "}
-            <Link href="/" className={cn("font-semibold text-foreground underline", focusRing)}>
+            <Link href="/workbench" className={cn("font-semibold text-foreground underline", focusRing)}>
               diagnosis dulu di Workbench
             </Link>
             .

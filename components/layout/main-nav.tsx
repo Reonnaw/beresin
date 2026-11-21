@@ -7,7 +7,7 @@ import { focusRing } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Workbench" },
+  { href: "/workbench", label: "Workbench" },
   { href: "/spare-parts", label: "Spare Part" },
   { href: "/service/book", label: "Booking Servis" },
   { href: "/service/track", label: "Lacak Servis" },
@@ -22,7 +22,7 @@ export function NavLinks({ pathname }: { pathname: string | null }) {
   return (
     <nav aria-label="Navigasi utama" className="flex min-w-0 items-center gap-1 overflow-x-auto">
       {NAV_ITEMS.map(({ href, label }) => {
-        const active = href === "/" ? pathname === "/" : !!pathname?.startsWith(href);
+        const active = !!pathname?.startsWith(href);
         return (
           <Link
             key={href}

@@ -26,7 +26,8 @@ Dengan CLI yang sudah di-link: `supabase db push`, lalu jalankan `seed.sql`. Unt
 
 | Route | Isi |
 | --- | --- |
-| `/` | Workbench: kanvas 3D, exploded view, pilih modul, checklist gejala, estimasi biaya |
+| `/` | Beranda: hero 3D interaktif, ringkasan modul, alur kerja, seri yang didukung |
+| `/workbench` | Workbench: kanvas 3D, exploded view, pilih modul, checklist gejala, estimasi biaya |
 | `/spare-parts` | Katalog spare part, filter modul dan seri laptop, status stok |
 | `/spare-parts/[sku]` | Detail spare part dan kerusakan yang diatasi |
 | `/cart` | Keranjang (disimpan di localStorage) |
@@ -51,7 +52,8 @@ app/                       Route: page tetap tipis, hanya menyusun komponen fitu
 components/ui/             Primitive UI: Button, Badge, Card, Field
 components/layout/         Shell aplikasi: header, navigasi, page header
 features/<domain>/
-  components/              Komponen fitur (workbench, diagnostic, spare-parts, cart, checkout, service, auth)
+  components/              Komponen fitur (home, workbench, diagnostic, spare-parts, cart, checkout, service, auth)
+  data/                    Konten statis (copy beranda)
   services/                Query Supabase sisi server (server-only)
   lib/                     Logika murni yang bisa dites
   actions.ts               Server Action
