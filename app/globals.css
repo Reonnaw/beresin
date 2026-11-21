@@ -1,32 +1,22 @@
 @import "tailwindcss";
 
-/* Palette tuned for WCAG AA: muted and accent text pass 4.5:1 on background in both schemes. */
+/*
+ * Industrial workbench palette, light only.
+ * Accent orange fails 4.5:1 as small text: use it for focus rings, indicators and
+ * charcoal-on-orange fills, never as body text. Danger text belongs on surface, not background.
+ */
 :root {
-  --background: #f7f8f9;
+  --background: #f5f4f0;
   --surface: #ffffff;
-  --border: #dde1e5;
-  --foreground: #101418;
-  --muted: #56606b;
-  --accent: #0b7a70;
-  --accent-foreground: #ffffff;
-  --danger: #c0362c;
-  --warning: #a15c00;
-  --success: #1f7a3a;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0d10;
-    --surface: #14181d;
-    --border: #262c33;
-    --foreground: #e6e8eb;
-    --muted: #9aa3ad;
-    --accent: #3dd6c6;
-    --accent-foreground: #04201d;
-    --danger: #ff6b5e;
-    --warning: #f0b34a;
-    --success: #5fd38a;
-  }
+  --border: #d8d6ce;
+  --foreground: #1a1b1e;
+  --muted: #5c6068;
+  --primary: #1a1b1e;
+  --primary-foreground: #ffffff;
+  --accent: #e85d2a;
+  --accent-foreground: #1a1b1e;
+  --danger: #d9383a;
+  --success: #2d6a4f;
 }
 
 @theme inline {
@@ -35,13 +25,14 @@
   --color-border: var(--border);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-danger: var(--danger);
-  --color-warning: var(--warning);
   --color-success: var(--success);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-plus-jakarta-sans);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
