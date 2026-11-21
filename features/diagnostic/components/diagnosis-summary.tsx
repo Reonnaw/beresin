@@ -1,6 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+import { Button, buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { estimateDiagnosis } from "@/features/diagnostic/lib/estimate";
 import { MODULE_LABELS } from "@/lib/constants/modules";
@@ -37,14 +39,23 @@ export function DiagnosisSummary({ issues }: { issues: DiagnosticIssue[] }) {
                   </span>{" "}
                   {issue.title}
                 </span>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => toggleFinding(issue)}
-                  aria-label={`Hapus ${issue.title}`}
-                >
-                  ✕
-                </Button>
+                <span className="flex shrink-0 items-center">
+                  <Link
+                    href={`/spare-parts?module=${issue.module_type}`}
+                    className={buttonStyles({ variant: "ghost", size: "sm" })}
+                    aria-label={`Cari spare part ${MODULE_LABELS[issue.module_type]}`}
+                  >
+                    Part
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => toggleFinding(issue)}
+                    aria-label={`Hapus ${issue.title}`}
+                  >
+                    ✕
+                  </Button>
+                </span>
               </li>
             ))}
           </ul>
@@ -56,9 +67,14 @@ export function DiagnosisSummary({ issues }: { issues: DiagnosticIssue[] }) {
             <dt className="text-muted">Estimasi waktu</dt>
             <dd className="font-mono">{formatDuration(estimate.durationMinutes)}</dd>
           </dl>
-          <Button variant="secondary" size="sm" onClick={clear} className="self-start">
-            Reset diagnosis
-          </Button>
+          <div className="flex gap-2">
+            <Link href="/service/book" className={buttonStyles({ className: "flex-1" })}>
+              Booking servis
+            </Link>
+            <Button variant="secondary" onClick={clear}>
+              Reset
+            </Button>
+          </div>
         </>
       )}
     </Card>

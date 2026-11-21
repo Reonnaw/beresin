@@ -1,8 +1,10 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { focusRing } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { MODULE_LABELS, MODULE_TYPES } from "@/lib/constants/modules";
+import { useDiagnosticStore } from "@/stores/diagnostic-store";
 import { useWorkbenchStore } from "@/stores/workbench-store";
 
 /** Keyboard-reachable twin of the canvas: select and show/hide every module. */
@@ -11,6 +13,7 @@ export function ModuleList() {
   const selectedModule = useWorkbenchStore((s) => s.selectedModule);
   const toggleModule = useWorkbenchStore((s) => s.toggleModule);
   const selectModule = useWorkbenchStore((s) => s.selectModule);
+  const findings = useDiagnosticStore((s) => s.findings);
 
   return (
     <section className="flex flex-col gap-2">
@@ -44,7 +47,10 @@ export function ModuleList() {
                   focusRing,
                 )}
               >
-                <span>{MODULE_LABELS[type]}</span>
+                <span className="flex items-center gap-2">
+                  {MODULE_LABELS[type]}
+                  {findings.some((f) => f.moduleType === type) && <Badge tone="danger">Rusak</Badge>}
+                </span>
                 <span className="font-mono text-xs text-muted">{type}</span>
               </button>
             </li>
