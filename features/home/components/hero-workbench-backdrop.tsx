@@ -13,7 +13,7 @@ import { useWorkbenchStore } from "@/stores/workbench-store";
 
 function BackdropStatus({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-full items-end justify-end p-5 font-mono text-xs text-muted lg:items-center lg:justify-center lg:pl-[40%]">
+    <div className="flex h-full items-center justify-center p-5 font-mono text-xs text-muted lg:pl-[40%]">
       {children}
     </div>
   );

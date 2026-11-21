@@ -34,9 +34,9 @@ function FrameOffset() {
   const height = useThree((s) => s.size.height);
 
   useEffect(() => {
-    const wide = width >= LG_BREAKPOINT;
-    // Desktop copy sits on the left, so the laptop moves right; on mobile the copy is on top, so it moves down.
-    camera.setViewOffset(width, height, wide ? -width * 0.2 : 0, wide ? 0 : -height * 0.2, width, height);
+    // From lg up the copy sits on the left, so the laptop moves right; below lg the canvas has its own block.
+    if (width < LG_BREAKPOINT) return;
+    camera.setViewOffset(width, height, -width * 0.2, 0, width, height);
     return () => camera.clearViewOffset();
   }, [camera, width, height]);
 
