@@ -353,7 +353,10 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      place_order: {
+        Args: { items: Json; shipping_address: string };
+        Returns: string;
+      };
     };
     Enums: {
       user_role: "customer" | "technician" | "admin";
