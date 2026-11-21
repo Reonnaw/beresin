@@ -4,7 +4,7 @@ export default function Home() {
       <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
         Bongkar laptopmu, temukan kerusakannya.
       </h1>
-      <p className="max-w-2xl text-lg text-foreground/70">
+      <p className="max-w-2xl text-lg text-muted">
         Diagnostik laptop modular dalam 3D: lepas tiap modul, lihat gejala
         kerusakan, beli spare part, dan booking servis dari satu tempat.
       </p>
