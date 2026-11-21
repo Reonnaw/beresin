@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 import { MainNav, NavLinks } from "@/components/layout/main-nav";
 import { focusRing } from "@/components/ui/button";
+import { CartLink } from "@/features/cart/components/cart-link";
 import { cn } from "@/lib/cn";
 
 export function SiteHeader() {
@@ -18,6 +19,9 @@ export function SiteHeader() {
         <Suspense fallback={<NavLinks pathname={null} />}>
           <MainNav />
         </Suspense>
+        <div className="ml-auto flex items-center gap-2">
+          <CartLink />
+        </div>
       </div>
     </header>
   );
