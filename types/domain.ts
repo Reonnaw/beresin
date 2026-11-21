@@ -37,3 +37,7 @@ export type DiagnosisSnapshot = {
   estimatedCostMin: number;
   estimatedCostMax: number;
 };
+
+export type SparePartWithModel = SparePart & {
+  laptop_models: Pick<LaptopModel, "name" | "slug"> | null;
+};
