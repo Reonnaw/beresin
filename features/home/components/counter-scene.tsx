@@ -1,30 +1,12 @@
 "use client";
 
 import { Bounds, OrbitControls } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { type ReactNode, useRef, useState } from "react";
-import type { Group } from "three";
+import { Canvas } from "@react-three/fiber";
+import { useState } from "react";
 
+import { CursorTilt } from "@/features/home/components/three/cursor-tilt";
 import { LaptopAssembly } from "@/features/workbench/components/laptop-assembly";
 import { useWorkbenchStore } from "@/stores/workbench-store";
-
-/** Radians the model leans toward the cursor at the canvas edge. */
-const MAX_TILT = 0.12;
-
-function CursorTilt({ enabled, children }: { enabled: boolean; children: ReactNode }) {
-  const group = useRef<Group>(null);
-
-  useFrame((state, delta) => {
-    if (!enabled || !group.current) return;
-    // Frame-rate independent easing toward the pointer.
-    const ease = 1 - Math.exp(-delta * 4);
-    const { rotation } = group.current;
-    rotation.y += (state.pointer.x * MAX_TILT - rotation.y) * ease;
-    rotation.x += (-state.pointer.y * MAX_TILT * 0.5 - rotation.x) * ease;
-  });
-
-  return <group ref={group}>{children}</group>;
-}
 
 export default function CounterScene() {
   const selectModule = useWorkbenchStore((s) => s.selectModule);
