@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { buttonStyles } from "@/components/ui/button";
+import { EmptyState } from "@/components/ui/empty-state";
 import { requireUser } from "@/features/auth/services/auth-service";
 import { getDiagnosticIssues } from "@/features/diagnostic/services/diagnostic-service";
 import { BookingCard } from "@/features/service/components/booking-card";
@@ -23,12 +24,15 @@ export async function BookingList({
 
   if (bookings.length === 0) {
     return (
-      <div className="flex flex-col items-start gap-3 rounded-[4px] border border-dashed border-border p-8">
-        <p className="text-muted">Belum ada tiket servis.</p>
-        <Link href="/service/book" className={buttonStyles({ variant: "secondary" })}>
-          Booking servis
-        </Link>
-      </div>
+      <EmptyState
+        action={
+          <Link href="/service/book" className={buttonStyles({ variant: "secondary" })}>
+            Booking servis
+          </Link>
+        }
+      >
+        Belum ada tiket servis.
+      </EmptyState>
     );
   }
 
@@ -37,7 +41,7 @@ export async function BookingList({
   return (
     <div className="flex flex-col gap-4">
       {bookings.some((b) => b.id === justBooked) && (
-        <p role="status" className="rounded-[4px] border border-success/30 bg-success/10 p-3 text-sm text-success">
+        <p role="status" className="rounded-sm border border-success/30 bg-success/10 p-3 text-sm text-success">
           Booking berhasil dibuat. Teknisi akan mengonfirmasi jadwal kamu.
         </p>
       )}

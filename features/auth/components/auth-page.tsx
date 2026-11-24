@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 
 import { Card } from "@/components/ui/card";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { LoadingText } from "@/components/ui/loading-text";
 import { AuthForm } from "@/features/auth/components/auth-form";
 import { firstParam } from "@/lib/search-params";
 import { safeNextPath } from "@/lib/safe-redirect";
@@ -24,11 +26,12 @@ export function AuthPage({ mode, searchParams }: { mode: "login" | "register"; s
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-5 py-12">
       <Card className="flex flex-col gap-6 p-6">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-semibold tracking-tight">{COPY[mode].title}</h1>
+        <div className="flex flex-col gap-1.5">
+          <Eyebrow>Akun Beresin</Eyebrow>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{COPY[mode].title}</h1>
           <p className="text-sm text-muted">{COPY[mode].description}</p>
         </div>
-        <Suspense fallback={<p className="font-mono text-sm text-muted">Memuat formulir…</p>}>
+        <Suspense fallback={<LoadingText>Memuat formulir…</LoadingText>}>
           <AuthFormWithParams mode={mode} searchParams={searchParams} />
         </Suspense>
       </Card>

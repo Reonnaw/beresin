@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { PageHeader } from "@/components/layout/page-header";
+import { LoadingText } from "@/components/ui/loading-text";
 import { requireUser } from "@/features/auth/services/auth-service";
 import { getDiagnosticIssues } from "@/features/diagnostic/services/diagnostic-service";
 import { BookingForm } from "@/features/service/components/booking-form";
@@ -21,10 +22,11 @@ export default function ServiceBookPage() {
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-5 py-8">
       <PageHeader
+        eyebrow="Servis · jadwalkan teknisi"
         title="Booking Servis"
         description="Hasil diagnosis dari Workbench ikut terkirim ke teknisi beserta estimasi biayanya."
       />
-      <Suspense fallback={<p className="font-mono text-sm text-muted">Memeriksa sesi…</p>}>
+      <Suspense fallback={<LoadingText>Memeriksa sesi…</LoadingText>}>
         <SignedInBooking />
       </Suspense>
     </main>

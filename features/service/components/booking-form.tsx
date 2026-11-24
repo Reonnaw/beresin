@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { useActionState, useState } from "react";
 
-import { Button, focusRing } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { LoadingText } from "@/components/ui/loading-text";
+import { inlineLinkStyles } from "@/components/ui/text-link";
 import { Field, inputStyles } from "@/components/ui/field";
 import { estimateDiagnosis } from "@/features/diagnostic/lib/estimate";
 import { type BookingFormState, createBooking } from "@/features/service/actions";
@@ -54,7 +56,7 @@ export function BookingForm({ models, issues, defaultModelId }: BookingFormProps
           {SERVICE_TYPES.map((type) => (
             <label
               key={type}
-              className="flex cursor-pointer items-center gap-3 rounded-[4px] border border-border p-3 text-sm has-checked:border-accent has-checked:bg-surface-muted"
+              className="flex cursor-pointer items-center gap-3 rounded-sm border border-border p-3 text-sm has-checked:border-accent has-checked:bg-surface-muted"
             >
               <input
                 type="radio"
@@ -103,13 +105,13 @@ export function BookingForm({ models, issues, defaultModelId }: BookingFormProps
       </Card>
 
       <Card className="flex h-fit flex-col gap-4 p-5">
-        <h2 className="font-semibold">Hasil diagnosis</h2>
+        <h2 className="font-bold tracking-tight">Hasil diagnosis</h2>
         {!hydrated ? (
-          <p className="font-mono text-sm text-muted">Memuat diagnosis…</p>
+          <LoadingText>Memuat diagnosis…</LoadingText>
         ) : estimate.issues.length === 0 ? (
           <p className="text-sm text-muted">
             Belum ada kerusakan yang dipilih. Teknisi akan memeriksa menyeluruh, atau{" "}
-            <Link href="/workbench" className={cn("font-semibold text-foreground underline", focusRing)}>
+            <Link href="/workbench" className={inlineLinkStyles}>
               diagnosis dulu di Workbench
             </Link>
             .

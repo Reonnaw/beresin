@@ -30,7 +30,7 @@ export function BookingCard({ booking, findings, highlighted }: BookingCardProps
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex flex-col gap-0.5">
           <p className="font-mono text-xs text-muted">Tiket #{formatShortId(booking.id)}</p>
-          <h2 className="font-semibold">{booking.laptop_models.name}</h2>
+          <h2 className="font-bold tracking-tight">{booking.laptop_models.name}</h2>
         </div>
         <Badge tone={STATUS_TONES[booking.status]}>{BOOKING_STATUS_LABELS[booking.status]}</Badge>
       </div>

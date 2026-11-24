@@ -11,7 +11,7 @@ type QuantityInputProps = {
 
 export function QuantityInput({ label, value, max, onChange }: QuantityInputProps) {
   return (
-    <div className="flex items-center rounded-[4px] border border-border" role="group" aria-label={label}>
+    <div className="flex items-center rounded-sm border border-border" role="group" aria-label={label}>
       <Button
         variant="ghost"
         size="sm"

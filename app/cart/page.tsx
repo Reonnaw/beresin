@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Keranjang" };
 export default function CartPage() {
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-5 py-8">
-      <PageHeader title="Keranjang" description="Spare part yang akan kamu beli." />
+      <PageHeader eyebrow="Belanja · spare part" title="Keranjang" description="Spare part yang akan kamu beli." />
       <CartView />
     </main>
   );

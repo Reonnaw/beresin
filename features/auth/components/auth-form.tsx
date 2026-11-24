@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useActionState } from "react";
 
-import { Button, focusRing } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Field, inputStyles } from "@/components/ui/field";
+import { inlineLinkStyles } from "@/components/ui/text-link";
 import { type AuthFormState, signIn, signUp } from "@/features/auth/actions";
-import { cn } from "@/lib/cn";
 
 type AuthFormProps = {
   mode: "login" | "register";
@@ -63,7 +63,7 @@ export function AuthForm({ mode, next, initialError }: AuthFormProps) {
       </Button>
       <p className="text-sm text-muted">
         {isRegister ? "Sudah punya akun? " : "Belum punya akun? "}
-        <Link href={switchHref} className={cn("font-semibold text-foreground underline", focusRing)}>
+        <Link href={switchHref} className={inlineLinkStyles}>
           {isRegister ? "Masuk" : "Daftar"}
         </Link>
       </p>

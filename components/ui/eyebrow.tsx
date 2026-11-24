@@ -5,6 +5,7 @@ import { cn } from "@/lib/cn";
 const tones = {
   accent: "text-accent-secondary",
   muted: "text-muted",
+  success: "text-success",
   danger: "text-danger",
 } as const;
 

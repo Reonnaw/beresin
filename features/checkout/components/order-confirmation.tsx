@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { requireUser } from "@/features/auth/services/auth-service";
 import { ClearCart } from "@/features/checkout/components/clear-cart";
 import { getOrder } from "@/features/checkout/services/order-service";
@@ -23,8 +24,8 @@ export async function OrderConfirmation({
     <Card className="flex flex-col gap-5 p-6">
       <ClearCart />
       <div className="flex flex-col gap-1">
-        <p className="font-mono text-xs uppercase tracking-wide text-success">Pesanan dibuat</p>
-        <h1 className="text-2xl font-semibold tracking-tight">Terima kasih!</h1>
+        <Eyebrow tone="success">Pesanan dibuat</Eyebrow>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Terima kasih!</h1>
         <p className="text-sm text-muted">
           No. pesanan <span className="font-mono text-foreground">{formatShortId(order.id)}</span>{" "}
           · {formatDateTime(order.created_at)}
@@ -45,7 +46,7 @@ export async function OrderConfirmation({
       </ul>
       <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
         <dt className="text-muted">Total</dt>
-        <dd className="font-mono font-semibold">{formatRupiah(order.total_amount)}</dd>
+        <dd className="font-mono font-semibold tabular-nums">{formatRupiah(order.total_amount)}</dd>
         <dt className="text-muted">Dikirim ke</dt>
         <dd className="whitespace-pre-line">{order.shipping_address}</dd>
       </dl>
