@@ -1,11 +1,15 @@
-import { PriceListSection } from "@/features/home/components/price-list-section";
-import { ServiceCounterSection } from "@/features/home/components/service-counter-section";
+import { HeroSection } from "@/features/home/components/hero-section";
+import { ModularOverviewSection } from "@/features/home/components/modular-overview-section";
+import { SupportedSeriesSection } from "@/features/home/components/supported-series-section";
+import { WorkflowSection } from "@/features/home/components/workflow-section";
 
 export default function HomePage() {
   return (
-    <main className="flex flex-1 flex-col">
-      <ServiceCounterSection />
-      <PriceListSection />
+    <main className="theme-stage flex flex-1 flex-col">
+      <HeroSection />
+      <ModularOverviewSection />
+      <WorkflowSection />
+      <SupportedSeriesSection />
     </main>
   );
 }

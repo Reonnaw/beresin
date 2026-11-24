@@ -9,6 +9,7 @@ Diagnostik kerusakan laptop modular dalam 3D. Pengguna membongkar laptop per mod
 ```bash
 pnpm install
 cp .env.example .env.local   # isi URL dan anon key dari Supabase Dashboard > Project Settings > API
+                             # SKETCHFAB_API_KEY opsional: tanpa key, hero memakai laptop 3D prosedural
 pnpm dev
 ```
 
@@ -26,7 +27,7 @@ Dengan CLI yang sudah di-link: `supabase db push`, lalu jalankan `seed.sql`. Unt
 
 | Route | Isi |
 | --- | --- |
-| `/` | Beranda: nota servis yang mengubah gejala jadi perkiraan biaya, model 3D, daftar harga part |
+| `/` | Beranda: panggung 3D laptop di atas pedestal dengan part yang melayang, ringkasan modul, alur kerja, seri yang didukung |
 | `/workbench` | Workbench: kanvas 3D, exploded view, pilih modul, checklist gejala, estimasi biaya |
 | `/spare-parts` | Katalog spare part, filter modul dan seri laptop, status stok |
 | `/spare-parts/[sku]` | Detail spare part dan kerusakan yang diatasi |
@@ -53,13 +54,14 @@ components/ui/             Primitive UI: Button, Badge, Card, Field
 components/layout/         Shell aplikasi: header, navigasi, page header
 features/<domain>/
   components/              Komponen fitur (home, workbench, diagnostic, spare-parts, cart, checkout, service, auth)
-  data/                    Konten statis (label grup gejala di beranda)
+  components/three/        Objek 3D prosedural (beranda: pedestal, lantai grid, laptop, part melayang)
+  data/                    Konten statis beranda dan palet warna untuk material three.js
   services/                Query Supabase sisi server (server-only)
   lib/                     Logika murni yang bisa dites
   actions.ts               Server Action
 stores/                    Zustand: workbench (3D), diagnosis, keranjang
 hooks/                     Hook bersama
-lib/                       Format, konstanta, validasi, client Supabase
+lib/                       Format, konstanta, validasi, client Supabase, layanan Sketchfab
 types/                     Tipe skema Supabase dan tipe domain
 supabase/                  Migrasi SQL dan seed
 proxy.ts                   Refresh session Supabase di setiap request

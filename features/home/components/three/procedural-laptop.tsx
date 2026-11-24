@@ -33,7 +33,7 @@ export function ProceduralLaptop() {
   return (
     <group>
       <RoundedBox args={[WIDTH, BASE_HEIGHT, DEPTH]} radius={0.03} position-y={BASE_HEIGHT / 2}>
-        <meshStandardMaterial color={STAGE_PALETTE.chassis} roughness={0.35} metalness={0.7} />
+        <meshStandardMaterial color={STAGE_PALETTE.chassis} roughness={0.4} metalness={0.3} />
       </RoundedBox>
 
       <Instances limit={KEYS.length}>
@@ -63,7 +63,7 @@ export function ProceduralLaptop() {
       {/* Lid pivots on the hinge along the back edge. */}
       <group position={[0, BASE_HEIGHT, -DEPTH / 2]} rotation-x={-LID_TILT}>
         <RoundedBox args={[WIDTH, LID_HEIGHT, 0.06]} radius={0.025} position={[0, LID_HEIGHT / 2, -0.03]}>
-          <meshStandardMaterial color={STAGE_PALETTE.chassis} roughness={0.35} metalness={0.7} />
+          <meshStandardMaterial color={STAGE_PALETTE.chassis} roughness={0.4} metalness={0.3} />
         </RoundedBox>
         <mesh position={[0, LID_HEIGHT / 2 + 0.03, 0.001]}>
           <planeGeometry args={[WIDTH - 0.16, LID_HEIGHT - 0.2]} />

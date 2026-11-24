@@ -12,12 +12,12 @@ import type { Vec3 } from "@/features/workbench/lib/module-layout";
 /** Where each part hangs around the pedestal, tilted so its most telling face shows. */
 const FLOATING_PARTS: { type: FloatingModule; position: Vec3; rotation: Vec3 }[] = [
   { type: "ram", position: [-3.4, 2.6, 0.2], rotation: [0.9, 0.5, -0.4] },
-  { type: "expansion_card", position: [-1.9, 3.6, -1.4], rotation: [0.5, 0.7, 0.4] },
-  { type: "motherboard", position: [1.8, 3.7, -1.8], rotation: [0.9, -0.4, 0.15] },
+  { type: "expansion_card", position: [-2.4, 3.2, -1.2], rotation: [0.5, 0.7, 0.4] },
+  { type: "motherboard", position: [2.1, 3.3, -1.8], rotation: [0.9, -0.4, 0.15] },
   { type: "ssd", position: [3.4, 2.5, -0.2], rotation: [0.8, -0.6, 0.5] },
-  { type: "fan", position: [3.6, 1.0, 1.5], rotation: [0.7, -0.4, -0.2] },
-  { type: "battery", position: [-3.6, 0.9, 1.7], rotation: [0.6, 0.5, 0.15] },
-  { type: "keyboard", position: [2.2, 0.55, 3.0], rotation: [0.25, 0.4, -0.2] },
+  { type: "fan", position: [4.0, 0.6, 0.6], rotation: [0.7, -0.4, -0.2] },
+  { type: "battery", position: [-3.9, 1.7, 1.2], rotation: [0.6, 0.5, 0.15] },
+  { type: "keyboard", position: [2.6, 1.9, 2.4], rotation: [0.25, 0.4, -0.2] },
 ];
 
 /** Pixels of pointer travel past which a release is an orbit drag, not a click. */

@@ -17,21 +17,42 @@ import { STAGE_PALETTE } from "@/features/home/data/stage-palette";
 import { useShowcaseModel } from "@/features/home/hooks/use-showcase-model";
 import type { Vec3 } from "@/features/workbench/lib/module-layout";
 
-/** Aim above the laptop so it sits in the lower half, clear of the headline. */
-const LOOK_AT: Vec3 = [0, 2.2, 0];
+/** Wide stages have copy over their top and bottom, so aim above the laptop to seat it below the headline. */
+const LOOK_AT_WIDE: Vec3 = [0, 2.2, 0];
+/** Narrow stages sit between the copy, so the laptop can take the middle. */
+const LOOK_AT_NARROW: Vec3 = [0, 1.6, 0];
 
-/** Pulls the camera back on narrow screens so the side parts stay in frame, up to where they would get too small. */
-function StageCamera() {
+function lookAtFor(aspect: number): Vec3 {
+  return aspect >= 1.2 ? LOOK_AT_WIDE : LOOK_AT_NARROW;
+}
+
+/**
+ * Pulls the camera back on narrow screens so the side parts stay in frame, up to where they would get too small.
+ * Orbit only on fine pointers: OrbitControls locks touch-action on the canvas, which would trap page scroll on phones.
+ */
+function StageCamera({ orbit }: { orbit: boolean }) {
   const camera = useThree((state) => state.camera);
   const aspect = useThree((state) => state.size.width / state.size.height);
 
   useLayoutEffect(() => {
-    const distance = MathUtils.clamp(12 * (1.7 / aspect), 12, 20);
+    const distance = MathUtils.clamp(12 * Math.sqrt(1.7 / aspect), 12, 17);
     camera.position.set(0, distance * 0.36, distance);
-    camera.lookAt(...LOOK_AT);
+    camera.lookAt(...lookAtFor(aspect));
   }, [aspect, camera]);
 
-  return null;
+  if (!orbit) return null;
+  return (
+    <OrbitControls
+      makeDefault
+      target={lookAtFor(aspect)}
+      enablePan={false}
+      enableZoom={false}
+      minPolarAngle={1}
+      maxPolarAngle={1.45}
+      minAzimuthAngle={-0.9}
+      maxAzimuthAngle={0.9}
+    />
+  );
 }
 
 export default function HeroLaptopScene() {
@@ -51,7 +72,7 @@ export default function HeroLaptopScene() {
         <ambientLight intensity={0.45} />
         <directionalLight position={[4, 8, 5]} intensity={1.8} />
         <directionalLight position={[-6, 3, -4]} intensity={0.8} color={STAGE_PALETTE.signal} />
-        <StageCamera />
+        <StageCamera orbit={finePointer} />
 
         <CursorTilt enabled={finePointer && animate}>
           <GridFloor />
@@ -65,20 +86,6 @@ export default function HeroLaptopScene() {
           </group>
           <FloatingParts animate={animate} selected={selected} onSelect={setSelected} />
         </CursorTilt>
-
-        {/* OrbitControls locks touch-action on the canvas, which would trap page scroll on phones. */}
-        {finePointer && (
-          <OrbitControls
-            makeDefault
-            target={LOOK_AT}
-            enablePan={false}
-            enableZoom={false}
-            minPolarAngle={1}
-            maxPolarAngle={1.45}
-            minAzimuthAngle={-0.9}
-            maxAzimuthAngle={0.9}
-          />
-        )}
       </Canvas>
 
       <div aria-live="polite" className="absolute inset-x-4 top-4 z-20 sm:inset-x-auto sm:right-5 sm:w-80 lg:top-1/2 lg:-translate-y-1/2">
@@ -87,7 +94,7 @@ export default function HeroLaptopScene() {
 
       {/* CC BY requires naming the model's maker; only shown once their model is on screen. */}
       {model && modelReady && (
-        <p className="absolute right-5 bottom-3 z-20 max-w-[60%] truncate text-right font-mono text-[11px] text-muted">
+        <p className="absolute inset-x-5 bottom-3 z-20 text-right font-mono text-[11px] text-muted lg:left-auto lg:max-w-md">
           Model 3D{" "}
           <a href={model.viewerUrl} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-foreground">
             {model.name}
