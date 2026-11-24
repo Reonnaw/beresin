@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { buttonStyles } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { HeroLaptopShowcase } from "@/features/home/components/hero-laptop-showcase";
 import { HERO_CONTENT } from "@/features/home/data/home-content";
 
@@ -17,10 +18,10 @@ export function HeroSection() {
       className="relative isolate flex flex-col border-b border-border lg:min-h-[calc(100svh-3.5rem)]"
     >
       <div className="flex flex-col items-center gap-4 px-5 pt-10 text-center sm:pt-14 lg:pointer-events-none">
-        <p className="font-mono text-xs tracking-[0.2em] text-accent-secondary uppercase">{eyebrow}</p>
+        <Eyebrow>{eyebrow}</Eyebrow>
         <h1
           id="hero-title"
-          className="max-w-4xl font-display text-4xl font-bold tracking-tight text-balance sm:text-6xl lg:text-7xl"
+          className="max-w-4xl text-4xl font-bold text-balance sm:text-6xl lg:text-7xl"
         >
           {headline}
         </h1>
@@ -34,10 +35,10 @@ export function HeroSection() {
         <div className="flex max-w-md flex-col gap-5 lg:pointer-events-auto">
           <p className="text-base text-muted sm:text-lg">{description}</p>
           <div className="flex flex-wrap gap-3">
-            <Link href={primaryCta.href} className={buttonStyles({ className: "h-11 px-5" })}>
+            <Link href={primaryCta.href} className={buttonStyles({ variant: "accent", size: "lg" })}>
               {primaryCta.label}
             </Link>
-            <Link href={secondaryCta.href} className={buttonStyles({ variant: "secondary", className: "h-11 px-5" })}>
+            <Link href={secondaryCta.href} className={buttonStyles({ variant: "secondary", size: "lg" })}>
               {secondaryCta.label}
             </Link>
           </div>

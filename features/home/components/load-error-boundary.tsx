@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 function LoadErrorFallback({ message }: { message: string }, { retry }: ErrorInfo) {
   return (
-    <div role="alert" className="flex flex-col items-start gap-3 rounded-[4px] border border-dashed border-danger/40 p-4">
+    <div role="alert" className="flex flex-col items-start gap-3 rounded-sm border border-dashed border-danger/40 p-4">
       <p className="text-sm">{message}</p>
       <Button variant="secondary" size="sm" onClick={() => retry()}>
         Coba lagi

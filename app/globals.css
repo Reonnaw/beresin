@@ -47,8 +47,7 @@
 }
 
 /* Night bench: anodized slate, never pure black. */
-[data-theme="dark"],
-.theme-stage {
+[data-theme="dark"] {
   color-scheme: dark;
   --bg-canvas: #11141a;
   --bg-surface: #181c24;
@@ -101,12 +100,6 @@
 }
 
 body {
-  background: var(--bg-canvas);
-  color: var(--text-primary);
-}
-
-/* The home stage scopes its own background until it follows the global theme. */
-.theme-stage {
   background: var(--bg-canvas);
   color: var(--text-primary);
 }

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { focusRing } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { LoadingText } from "@/components/ui/loading-text";
+import { actionLinkStyles } from "@/components/ui/text-link";
 import { LoadErrorBoundary } from "@/features/home/components/load-error-boundary";
 import { SectionHeading } from "@/features/home/components/section-heading";
 import { getLaptopModels } from "@/features/spare-parts/services/spare-part-service";
@@ -27,10 +28,10 @@ async function SeriesList() {
                 {model.release_year && ` · ${model.release_year}`}
               </span>
             </p>
-            <h3 className="font-display text-xl font-semibold">{model.name}</h3>
+            <h3 className="text-xl font-bold tracking-tight">{model.name}</h3>
             <Link
               href={`/spare-parts?model=${model.slug}`}
-              className={cn("mt-auto self-start text-sm font-semibold underline-offset-4 hover:underline", focusRing)}
+              className={cn(actionLinkStyles, "mt-auto self-start")}
             >
               Spare part untuk seri ini
             </Link>
@@ -47,7 +48,7 @@ export function SupportedSeriesSection() {
     <section aria-labelledby="series-title" className="mx-auto w-full max-w-7xl px-5 py-16 sm:py-20">
       <SectionHeading id="series-title" eyebrow="Seri didukung" title="Laptop modular yang bisa kamu diagnosis di sini." />
       <LoadErrorBoundary message="Daftar seri laptop gagal dimuat.">
-        <Suspense fallback={<p className="font-mono text-sm text-muted">Memuat seri…</p>}>
+        <Suspense fallback={<LoadingText>Memuat seri…</LoadingText>}>
           <SeriesList />
         </Suspense>
       </LoadErrorBoundary>

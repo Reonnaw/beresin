@@ -5,7 +5,7 @@ import { WorkflowSection } from "@/features/home/components/workflow-section";
 
 export default function HomePage() {
   return (
-    <main className="theme-stage flex flex-1 flex-col">
+    <main className="flex flex-1 flex-col">
       <HeroSection />
       <ModularOverviewSection />
       <WorkflowSection />

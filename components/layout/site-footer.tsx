@@ -4,6 +4,7 @@ import { BrandLink } from "@/components/layout/brand-link";
 import { NAV_ITEMS } from "@/components/layout/nav-items";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { focusRing } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { cn } from "@/lib/cn";
 
 /** Site map and the theme switcher, which the header hides on small screens to keep its row usable. */
@@ -29,7 +30,7 @@ export function SiteFooter() {
           </ul>
         </nav>
         <div className="flex flex-col gap-2">
-          <p className="font-mono text-xs tracking-[0.2em] text-muted uppercase">Tema</p>
+          <Eyebrow tone="muted">Tema</Eyebrow>
           <ThemeSwitcher />
         </div>
       </div>

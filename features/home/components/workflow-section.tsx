@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { focusRing } from "@/components/ui/button";
+import { actionLinkStyles } from "@/components/ui/text-link";
 import { SectionHeading } from "@/features/home/components/section-heading";
 import { WORKFLOW_STEPS } from "@/features/home/data/home-content";
 import { cn } from "@/lib/cn";
@@ -15,18 +15,18 @@ export function WorkflowSection() {
           eyebrow="Alur kerja · 3 langkah"
           title="Dari bongkar model sampai laptop kembali normal."
         />
-        <ol className="grid gap-px overflow-hidden rounded-[6px] border border-border bg-border md:grid-cols-3">
+        <ol className="grid gap-px overflow-hidden rounded-md border border-border bg-border md:grid-cols-3">
           {WORKFLOW_STEPS.map((step, index) => (
             <li key={step.code} className="relative flex flex-col gap-3 bg-surface p-5 sm:p-6">
               <p className="flex items-center gap-2 font-mono text-xs tracking-wide text-accent-secondary">
                 <span aria-hidden className="size-2 bg-accent" />
                 {step.code}
               </p>
-              <h3 className="font-display text-xl font-semibold">{step.title}</h3>
+              <h3 className="text-xl font-bold tracking-tight">{step.title}</h3>
               <p className="text-sm text-muted">{step.description}</p>
               <Link
                 href={step.link.href}
-                className={cn("mt-auto self-start pt-2 text-sm font-semibold underline-offset-4 hover:underline", focusRing)}
+                className={cn(actionLinkStyles, "mt-auto self-start pt-2")}
               >
                 {step.link.label}
               </Link>

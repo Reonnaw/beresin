@@ -14,12 +14,12 @@ export function PartDetailCard({ type, onClose }: { type: FloatingModule; onClos
     <Card
       role="region"
       aria-labelledby="part-detail-title"
-      className="flex flex-col gap-3 p-4 shadow-[0_0_0_1px_var(--accent-secondary)]"
+      className="flex flex-col gap-3 p-4 ring-1 ring-accent-secondary"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-col gap-1">
           <p className="font-mono text-xs text-accent-secondary">{part.skuPrefix}</p>
-          <h2 id="part-detail-title" className="font-display text-lg font-semibold">
+          <h2 id="part-detail-title" className="text-lg font-bold tracking-tight">
             {part.name}
           </h2>
         </div>
@@ -27,7 +27,7 @@ export function PartDetailCard({ type, onClose }: { type: FloatingModule; onClos
           type="button"
           onClick={onClose}
           aria-label="Tutup detail part"
-          className={cn("grid size-8 place-items-center rounded-[4px] text-muted hover:text-foreground", focusRing)}
+          className={cn("grid size-8 place-items-center rounded-sm text-muted hover:text-foreground", focusRing)}
         >
           <span aria-hidden>×</span>
         </button>
