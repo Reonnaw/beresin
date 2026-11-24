@@ -21,7 +21,7 @@ export function ModularOverviewSection() {
           return (
             <li key={type} className="flex flex-col gap-3 bg-surface p-5">
               <p className="flex justify-between gap-3 font-mono text-xs text-muted">
-                <span className="text-signal">{part.skuPrefix}</span>
+                <span className="text-accent-secondary">{part.skuPrefix}</span>
                 <span>M{String(index + 1).padStart(2, "0")}</span>
               </p>
               <h3 className="font-display text-lg font-semibold">{part.name}</h3>

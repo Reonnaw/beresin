@@ -1,72 +1,85 @@
 @import "tailwindcss";
 
+/* `dark:` follows the theme resolved onto <html data-theme>, so it honours the user's choice, not only the OS. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /*
- * Industrial workbench palette, light only.
- * Accent orange fails 4.5:1 as small text: use it for focus rings, indicators and
- * charcoal-on-orange fills, never as body text. Danger text belongs on surface, not background.
+ * Design tokens, light (daylight workbench) by default.
+ *
+ * The accent and status values are fills: rings, bars, badges' tints and 3D accents.
+ * Text in cobalt, emerald or crimson uses the *-ink variant, nudged until it passes
+ * 4.5:1 on canvas, surface, subtle and a 10% tint of itself. Orange is 3.1:1 on the
+ * light canvas, so in light mode it never carries text; charcoal-on-orange fills only.
  */
 :root {
-  --background: #f5f4f0;
-  --surface: #ffffff;
-  --surface-muted: #eceae2;
-  --border: #d8d6ce;
-  --foreground: #1a1b1e;
-  --muted: #5c6068;
-  --primary: #1a1b1e;
-  --primary-foreground: #ffffff;
-  --accent: #e85d2a;
-  --accent-foreground: #1a1b1e;
-  --danger: #d9383a;
-  --success: #2d6a4f;
-  /* Signal cyan only reads on the dark stage; it stays defined here so the token always resolves. */
-  --signal: #0e7490;
+  color-scheme: light;
+  --bg-canvas: #f4f1ea;
+  --bg-surface: #ffffff;
+  --bg-subtle: #eae5d9;
+  --border-hairline: #d5cfc2;
+  --text-primary: #14171f;
+  --text-secondary: #525866;
+  --accent-primary: #e85d2a;
+  --accent-secondary: #1d5b79;
+  --status-ok: #1f7a5a;
+  --status-fault: #d13438;
+
+  --accent-secondary-ink: #1d5b79;
+  --status-ok-ink: #1b694d;
+  --status-fault-ink: #ab2b2e;
+  /* Solid primary buttons are ink-colored, so their label takes the opposite end of the scale. */
+  --text-inverse: #ffffff;
+  --text-on-accent: #14171f;
 }
 
-/*
- * Dark stage for the 3D showroom. Every token is redefined, so cards, buttons and
- * badges inside a .theme-stage subtree recolor without new variants.
- * On #0B0E17 orange passes 4.5:1 as text, so here it may label things.
- */
+/* Night bench: anodized slate, never pure black. */
+[data-theme="dark"],
 .theme-stage {
-  --background: #0b0e17;
-  --surface: #111725;
-  --surface-muted: #182033;
-  --border: #28384e;
-  --foreground: #e6e9f0;
-  --muted: #94a3b8;
-  --primary: #e85d2a;
-  --primary-foreground: #0b0e17;
-  --accent: #e85d2a;
-  --accent-foreground: #0b0e17;
-  --danger: #f87171;
-  --success: #4ade80;
-  --signal: #22d3ee;
-  --stage-grid: #1e293b;
-  background: var(--background);
-  color: var(--foreground);
   color-scheme: dark;
+  --bg-canvas: #11141a;
+  --bg-surface: #181c24;
+  --bg-subtle: #202530;
+  --border-hairline: #2c3240;
+  --text-primary: #f3f1ec;
+  --text-secondary: #9aa2b2;
+  --accent-primary: #f06a3b;
+  --accent-secondary: #3889b2;
+  --status-ok: #2ea076;
+  --status-fault: #e0484c;
+
+  --accent-secondary-ink: #60a1c1;
+  --status-ok-ink: #43aa84;
+  --status-fault-ink: #e87679;
+  --text-inverse: #11141a;
+  --text-on-accent: #11141a;
 }
 
+/* Tailwind names stay short (bg-surface, text-muted); each maps to one token above. */
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-muted: var(--surface-muted);
-  --color-border: var(--border);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-danger: var(--danger);
-  --color-success: var(--success);
-  --color-signal: var(--signal);
+  --color-background: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-surface-muted: var(--bg-subtle);
+  --color-border: var(--border-hairline);
+  --color-foreground: var(--text-primary);
+  --color-muted: var(--text-secondary);
+  --color-primary: var(--text-primary);
+  --color-primary-foreground: var(--text-inverse);
+  --color-accent: var(--accent-primary);
+  --color-accent-foreground: var(--text-on-accent);
+  --color-accent-secondary: var(--accent-secondary-ink);
+  --color-success: var(--status-ok-ink);
+  --color-danger: var(--status-fault-ink);
   --font-sans: var(--font-plus-jakarta-sans);
-  --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+}
+
+/* The home stage scopes its own background until it follows the global theme. */
+.theme-stage {
+  background: var(--bg-canvas);
+  color: var(--text-primary);
 }

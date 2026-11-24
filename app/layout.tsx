@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 
 import { SiteHeader } from "@/components/layout/site-header";
 import { StoreHydration } from "@/components/store-hydration";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeScript } from "@/components/theme/theme-script";
 
 import "./globals.css";
 
@@ -13,12 +15,6 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-});
-
-// Display face for showroom headlines only; body copy stays on Plus Jakarta Sans.
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -33,13 +29,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    // data-theme is only the server default: the head script corrects it before paint, hence suppressHydrationWarning.
     <html
       lang="id"
-      className={`${plusJakartaSans.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable} font-sans h-full antialiased`}
+      data-theme="light"
+      suppressHydrationWarning
+      className={`${plusJakartaSans.variable} ${jetBrainsMono.variable} font-sans h-full antialiased`}
     >
+      <head>
+        <ThemeScript />
+      </head>
       <body className="min-h-full flex flex-col">
-        <SiteHeader />
-        {children}
+        <ThemeProvider>
+          <SiteHeader />
+          {children}
+        </ThemeProvider>
         <StoreHydration />
       </body>
     </html>

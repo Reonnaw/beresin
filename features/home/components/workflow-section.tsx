@@ -18,7 +18,7 @@ export function WorkflowSection() {
         <ol className="grid gap-px overflow-hidden rounded-[6px] border border-border bg-border md:grid-cols-3">
           {WORKFLOW_STEPS.map((step, index) => (
             <li key={step.code} className="relative flex flex-col gap-3 bg-surface p-5 sm:p-6">
-              <p className="flex items-center gap-2 font-mono text-xs tracking-wide text-signal">
+              <p className="flex items-center gap-2 font-mono text-xs tracking-wide text-accent-secondary">
                 <span aria-hidden className="size-2 bg-accent" />
                 {step.code}
               </p>

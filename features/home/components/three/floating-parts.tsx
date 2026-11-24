@@ -72,7 +72,7 @@ function FloatingPart({ type, position, rotation, animate, selected, onSelect }:
       {active && (
         <Html center position={[0, 0.6, 0]} className="pointer-events-none">
           <span className="block whitespace-nowrap rounded-[4px] border border-border bg-surface px-2 py-1 font-mono text-xs text-foreground">
-            {content.name} <span className="text-signal">{content.skuPrefix}</span>
+            {content.name} <span className="text-accent-secondary">{content.skuPrefix}</span>
           </span>
         </Html>
       )}

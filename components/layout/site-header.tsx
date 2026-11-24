@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import { MainNav, NavLinks } from "@/components/layout/main-nav";
+import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { focusRing } from "@/components/ui/button";
 import { UserMenu } from "@/features/auth/components/user-menu";
 import { CartLink } from "@/features/cart/components/cart-link";
@@ -21,6 +22,7 @@ export function SiteHeader() {
           <MainNav />
         </Suspense>
         <div className="ml-auto flex items-center gap-2">
+          <ThemeSwitcher />
           <CartLink />
           <Suspense fallback={<span className="h-8 w-16" aria-hidden />}>
             <UserMenu />

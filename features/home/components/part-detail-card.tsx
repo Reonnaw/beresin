@@ -14,11 +14,11 @@ export function PartDetailCard({ type, onClose }: { type: FloatingModule; onClos
     <Card
       role="region"
       aria-labelledby="part-detail-title"
-      className="flex flex-col gap-3 p-4 shadow-[0_0_0_1px_var(--signal)]"
+      className="flex flex-col gap-3 p-4 shadow-[0_0_0_1px_var(--accent-secondary)]"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-col gap-1">
-          <p className="font-mono text-xs text-signal">{part.skuPrefix}</p>
+          <p className="font-mono text-xs text-accent-secondary">{part.skuPrefix}</p>
           <h2 id="part-detail-title" className="font-display text-lg font-semibold">
             {part.name}
           </h2>
