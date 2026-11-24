@@ -2,7 +2,7 @@
 
 import { Float, Html, useCursor } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { type RefObject, useRef, useState } from "react";
 import { type Group, MathUtils } from "three";
 
 import { type FloatingModule, HARDWARE_PARTS } from "@/features/home/components/three/hardware-parts";
@@ -23,76 +23,89 @@ const FLOATING_PARTS: { type: FloatingModule; position: Vec3; rotation: Vec3 }[]
 /** Pixels of pointer travel past which a release is an orbit drag, not a click. */
 const CLICK_SLOP = 6;
 
+/** At full scroll spread each part sits this much farther from the center, and this much higher. */
+const SPREAD_OUT = 0.6;
+const SPREAD_LIFT = 1.2;
+
 type FloatingPartProps = {
   type: FloatingModule;
   position: Vec3;
   rotation: Vec3;
   animate: boolean;
+  /** Scroll progress from 0 to 1, written by ScrollRig. */
+  spreadRef: RefObject<number>;
   selected: boolean;
   onSelect: (type: FloatingModule) => void;
 };
 
-function FloatingPart({ type, position, rotation, animate, selected, onSelect }: FloatingPartProps) {
+function FloatingPart({ type, position, rotation, animate, spreadRef, selected, onSelect }: FloatingPartProps) {
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
+  const anchor = useRef<Group>(null);
   const scaler = useRef<Group>(null);
   const Part = HARDWARE_PARTS[type];
   const active = hovered || selected;
   const content = HOME_MODULES[type];
 
   useFrame((_, delta) => {
-    if (!scaler.current) return;
+    if (!anchor.current || !scaler.current) return;
+    const [x, y, z] = position;
+    const out = 1 + spreadRef.current * SPREAD_OUT;
+    anchor.current.position.set(x * out, y + spreadRef.current * SPREAD_LIFT, z * out);
     scaler.current.scale.setScalar(MathUtils.damp(scaler.current.scale.x, active ? 1.15 : 1, 8, delta));
   });
 
   return (
-    <Float
-      enabled={animate}
-      position={position}
-      speed={1.4}
-      rotationIntensity={0.5}
-      floatIntensity={0.9}
-      floatingRange={[-0.12, 0.12]}
-    >
-      <group
-        ref={scaler}
-        rotation={rotation}
-        onPointerOver={(event) => {
-          event.stopPropagation();
-          setHovered(true);
-        }}
-        onPointerOut={() => setHovered(false)}
-        onClick={(event) => {
-          event.stopPropagation();
-          if (event.delta <= CLICK_SLOP) onSelect(type);
-        }}
+    <group ref={anchor} position={position}>
+      <Float
+        enabled={animate}
+        speed={1.4}
+        rotationIntensity={0.5}
+        floatIntensity={0.9}
+        floatingRange={[-0.12, 0.12]}
       >
-        <Part active={active} animate={animate} />
-      </group>
-      {active && (
-        <Html center position={[0, 0.6, 0]} className="pointer-events-none">
-          <span className="block whitespace-nowrap rounded-sm border border-border bg-surface px-2 py-1 font-mono text-xs text-foreground">
-            {content.name} <span className="text-accent-secondary">{content.skuPrefix}</span>
-          </span>
-        </Html>
-      )}
-    </Float>
+        <group
+          ref={scaler}
+          rotation={rotation}
+          onPointerOver={(event) => {
+            event.stopPropagation();
+            setHovered(true);
+          }}
+          onPointerOut={() => setHovered(false)}
+          onClick={(event) => {
+            event.stopPropagation();
+            if (event.delta <= CLICK_SLOP) onSelect(type);
+          }}
+        >
+          <Part active={active} animate={animate} />
+        </group>
+        {active && (
+          <Html center position={[0, 0.6, 0]} className="pointer-events-none">
+            <span className="block whitespace-nowrap rounded-sm border border-border bg-surface px-2 py-1 font-mono text-xs text-foreground">
+              {content.name} <span className="text-accent-secondary">{content.skuPrefix}</span>
+            </span>
+          </Html>
+        )}
+      </Float>
+    </group>
   );
 }
 
 type FloatingPartsProps = {
   animate: boolean;
+  spreadRef: RefObject<number>;
   selected: FloatingModule | null;
   onSelect: (type: FloatingModule) => void;
 };
 
 /** RAM, SSD, battery, fan, expansion card, mainboard and keycaps hovering around the pedestal. */
-export function FloatingParts({ animate, selected, onSelect }: FloatingPartsProps) {
+export function FloatingParts({ animate, spreadRef, selected, onSelect }: FloatingPartsProps) {
   return FLOATING_PARTS.map((part) => (
     <FloatingPart
       key={part.type}
       {...part}
       animate={animate}
+      spreadRef={spreadRef}
       selected={selected === part.type}
       onSelect={onSelect}
     />

@@ -6,7 +6,6 @@ import type { ModuleType } from "@/types/domain";
  */
 
 export const HERO_CONTENT = {
-  eyebrow: "8 modul · bongkar pasang · tanpa tebak-tebakan",
   headline: "Bongkar laptopmu di layar dulu.",
   description:
     "Putar laptopnya, klik bagian yang bermasalah, dan lihat kisaran biaya sebelum membuka satu baut pun. Part yang cocok dan jadwal teknisi menunggu di langkah berikutnya.",
@@ -15,7 +14,6 @@ export const HERO_CONTENT = {
     { tag: "01 · Workbench", label: "Mulai Diagnostik 3D", href: "/workbench", tone: "accent" },
     { tag: "02 · Katalog", label: "Katalog Spare Part", href: "/spare-parts", tone: "surface" },
   ],
-  canvasHint: "Arahkan kursor ke part yang melayang, klik untuk spesifikasinya.",
 } as const;
 
 type HomeModule = {

@@ -2,7 +2,7 @@
 
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
-import { useCallback, useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { MathUtils } from "three";
 
 import { SceneLights } from "@/components/three/scene-lights";
@@ -13,6 +13,7 @@ import { GridFloor } from "@/features/home/components/three/grid-floor";
 import type { FloatingModule } from "@/features/home/components/three/hardware-parts";
 import { Pedestal, PEDESTAL_TOP } from "@/features/home/components/three/pedestal";
 import { ProceduralLaptop } from "@/features/home/components/three/procedural-laptop";
+import { ScrollRig } from "@/features/home/components/three/scroll-rig";
 import { SketchfabLaptop } from "@/features/home/components/three/sketchfab-laptop";
 import { useShowcaseModel } from "@/features/home/hooks/use-showcase-model";
 import type { Vec3 } from "@/features/workbench/lib/module-layout";
@@ -59,6 +60,7 @@ export default function HeroLaptopScene() {
   const [reducedMotion] = useState(() => matchMedia("(prefers-reduced-motion: reduce)").matches);
   const animate = !reducedMotion;
   const markReady = useCallback(() => setModelReady(true), []);
+  const scrollProgressRef = useRef(0);
 
   return (
     <div className="relative h-full">
@@ -68,15 +70,23 @@ export default function HeroLaptopScene() {
 
         <CursorTilt enabled={finePointer && animate}>
           <GridFloor />
-          <Pedestal />
-          <group position-y={PEDESTAL_TOP}>
-            {model ? (
-              <SketchfabLaptop url={model.glbUrl} fallback={<ProceduralLaptop />} onReady={markReady} />
-            ) : (
-              <ProceduralLaptop />
-            )}
-          </group>
-          <FloatingParts animate={animate} selected={selected} onSelect={setSelected} />
+          {/* Scrolling away turns the stage and lets the parts drift apart, like an exploded view. */}
+          <ScrollRig progressRef={scrollProgressRef} enabled={animate}>
+            <Pedestal />
+            <group position-y={PEDESTAL_TOP}>
+              {model ? (
+                <SketchfabLaptop url={model.glbUrl} fallback={<ProceduralLaptop />} onReady={markReady} />
+              ) : (
+                <ProceduralLaptop />
+              )}
+            </group>
+            <FloatingParts
+              animate={animate}
+              spreadRef={scrollProgressRef}
+              selected={selected}
+              onSelect={setSelected}
+            />
+          </ScrollRig>
         </CursorTilt>
       </Canvas>
 
