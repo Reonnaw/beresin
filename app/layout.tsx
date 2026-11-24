@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 
 import { SiteHeader } from "@/components/layout/site-header";
 import { StoreHydration } from "@/components/store-hydration";
@@ -16,6 +16,12 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// Display face for showroom headlines only; body copy stays on Plus Jakarta Sans.
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Beresin",
@@ -29,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="id"
-      className={`${plusJakartaSans.variable} ${jetBrainsMono.variable} font-sans h-full antialiased`}
+      className={`${plusJakartaSans.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable} font-sans h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <SiteHeader />

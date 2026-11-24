@@ -18,6 +18,33 @@
   --accent-foreground: #1a1b1e;
   --danger: #d9383a;
   --success: #2d6a4f;
+  /* Signal cyan only reads on the dark stage; it stays defined here so the token always resolves. */
+  --signal: #0e7490;
+}
+
+/*
+ * Dark stage for the 3D showroom. Every token is redefined, so cards, buttons and
+ * badges inside a .theme-stage subtree recolor without new variants.
+ * On #0B0E17 orange passes 4.5:1 as text, so here it may label things.
+ */
+.theme-stage {
+  --background: #0b0e17;
+  --surface: #111725;
+  --surface-muted: #182033;
+  --border: #28384e;
+  --foreground: #e6e9f0;
+  --muted: #94a3b8;
+  --primary: #e85d2a;
+  --primary-foreground: #0b0e17;
+  --accent: #e85d2a;
+  --accent-foreground: #0b0e17;
+  --danger: #f87171;
+  --success: #4ade80;
+  --signal: #22d3ee;
+  --stage-grid: #1e293b;
+  background: var(--background);
+  color: var(--foreground);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -33,7 +60,9 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-danger: var(--danger);
   --color-success: var(--success);
+  --color-signal: var(--signal);
   --font-sans: var(--font-plus-jakarta-sans);
+  --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-jetbrains-mono);
 }
 
