@@ -1,6 +1,8 @@
 "use client";
 
 import { Badge, type BadgeTone } from "@/components/ui/badge";
+import { EmptyState } from "@/components/ui/empty-state";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { MODULE_LABELS, SEVERITY_LABELS } from "@/lib/constants/modules";
 import { formatCostRange, formatDuration } from "@/lib/format";
 import { useDiagnosticStore } from "@/stores/diagnostic-store";
@@ -22,9 +24,7 @@ export function IssueChecklist({ issues }: { issues: DiagnosticIssue[] }) {
 
   if (!selectedModule) {
     return (
-      <p className="rounded-[4px] border border-dashed border-border p-4 text-sm text-muted">
-        Klik modul pada kanvas atau daftar modul untuk memeriksa gejalanya.
-      </p>
+      <EmptyState>Klik modul pada kanvas atau daftar modul untuk memeriksa gejalanya.</EmptyState>
     );
   }
 
@@ -33,8 +33,8 @@ export function IssueChecklist({ issues }: { issues: DiagnosticIssue[] }) {
   return (
     <section className="flex flex-col gap-3" aria-live="polite">
       <div>
-        <p className="font-mono text-xs uppercase tracking-wide text-muted">{selectedModule}</p>
-        <h2 className="text-lg font-semibold">Gejala {MODULE_LABELS[selectedModule]}</h2>
+        <Eyebrow tone="muted">{selectedModule}</Eyebrow>
+        <h2 className="text-lg font-bold tracking-tight">Gejala {MODULE_LABELS[selectedModule]}</h2>
       </div>
       {moduleIssues.length === 0 ? (
         <p className="text-sm text-muted">Belum ada data kerusakan untuk modul ini.</p>
@@ -42,7 +42,7 @@ export function IssueChecklist({ issues }: { issues: DiagnosticIssue[] }) {
         <ul className="flex flex-col gap-2">
           {moduleIssues.map((issue) => (
             <li key={issue.id}>
-              <label className="flex cursor-pointer gap-3 rounded-[4px] border border-border p-3 has-checked:border-danger has-checked:bg-danger/5">
+              <label className="flex cursor-pointer gap-3 rounded-sm border border-border p-3 has-checked:border-danger has-checked:bg-danger/5">
                 <input
                   type="checkbox"
                   checked={findings.some((f) => f.issueId === issue.id)}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import { focusRing } from "@/components/ui/button";
+import { LoadingText } from "@/components/ui/loading-text";
 import { SparePartDetail } from "@/features/spare-parts/components/spare-part-detail";
 import { cn } from "@/lib/cn";
 
@@ -17,7 +18,7 @@ export default function SparePartPage(props: PageProps<"/spare-parts/[sku]">) {
       >
         ← Kembali ke katalog
       </Link>
-      <Suspense fallback={<p className="font-mono text-sm text-muted">Memuat spare part…</p>}>
+      <Suspense fallback={<LoadingText>Memuat spare part…</LoadingText>}>
         <SparePartDetail params={props.params} />
       </Suspense>
     </main>

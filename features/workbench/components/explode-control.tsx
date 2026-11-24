@@ -14,7 +14,7 @@ export function ExplodeControl() {
         <label htmlFor="explode" className="text-sm font-semibold">
           Exploded view
         </label>
-        <output htmlFor="explode" className="font-mono text-sm tabular-nums">
+        <output htmlFor="explode" className="font-mono text-sm text-accent-secondary tabular-nums">
           {Math.round(explode * 100)}%
         </output>
       </div>

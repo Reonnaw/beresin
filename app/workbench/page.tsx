@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { LoadingText } from "@/components/ui/loading-text";
 import { DiagnosticSection } from "@/features/diagnostic/components/diagnostic-section";
 import { ExplodeControl } from "@/features/workbench/components/explode-control";
 import { ModuleFromUrl } from "@/features/workbench/components/module-from-url";
@@ -20,10 +22,11 @@ export default function WorkbenchPage() {
         <ModuleFromUrl />
       </Suspense>
       <aside className="flex flex-col gap-6 border-t border-border bg-surface p-5 lg:overflow-y-auto lg:border-t-0 lg:border-l">
-        <h1 className="text-xl font-semibold tracking-tight">Workbench</h1>
-        <Suspense
-          fallback={<p className="font-mono text-sm text-muted">Memuat data diagnostik…</p>}
-        >
+        <div className="flex flex-col gap-1.5">
+          <Eyebrow>Diagnostik 3D</Eyebrow>
+          <h1 className="text-2xl font-bold tracking-tight">Workbench</h1>
+        </div>
+        <Suspense fallback={<LoadingText>Memuat data diagnostik…</LoadingText>}>
           <DiagnosticSection />
         </Suspense>
         <ExplodeControl />

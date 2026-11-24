@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+import { EmptyState } from "@/components/ui/empty-state";
+import { actionLinkStyles } from "@/components/ui/text-link";
 import { CatalogFilters } from "@/features/spare-parts/components/catalog-filters";
 import { SparePartCard } from "@/features/spare-parts/components/spare-part-card";
 import { getLaptopModels, getSpareParts } from "@/features/spare-parts/services/spare-part-service";
@@ -18,13 +22,19 @@ export async function SparePartCatalog({
   return (
     <>
       <CatalogFilters models={models} active={{ module: moduleType, model: model?.slug }} />
-      <p className="font-mono text-xs text-muted" aria-live="polite">
+      <p className="font-mono text-xs text-muted tabular-nums" aria-live="polite">
         {parts.length} spare part
       </p>
       {parts.length === 0 ? (
-        <p className="rounded-[4px] border border-dashed border-border p-8 text-center text-sm text-muted">
+        <EmptyState
+          action={
+            <Link href="/spare-parts" className={actionLinkStyles}>
+              Hapus semua filter
+            </Link>
+          }
+        >
           Tidak ada spare part untuk filter ini.
-        </p>
+        </EmptyState>
       ) : (
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {parts.map((part) => (

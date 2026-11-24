@@ -12,7 +12,7 @@ import type { SparePartWithModel } from "@/types/domain";
 
 export function SparePartCard({ part }: { part: SparePartWithModel }) {
   return (
-    <Card className="relative flex w-full flex-col gap-3 p-4 hover:border-muted">
+    <Card className="relative flex w-full flex-col gap-3 p-4 transition-colors hover:border-accent-secondary">
       <div className="flex items-center justify-between gap-2">
         <span className="font-mono text-xs uppercase tracking-wide text-muted">
           {MODULE_LABELS[part.module_type]}
@@ -34,7 +34,7 @@ export function SparePartCard({ part }: { part: SparePartWithModel }) {
       <p className="text-xs text-muted">
         Kompatibel: {part.laptop_models?.name ?? "Semua seri (universal)"}
       </p>
-      <p className="border-t border-border pt-3 font-mono text-lg font-semibold">
+      <p className="border-t border-border pt-3 font-mono text-lg font-semibold tabular-nums">
         {formatRupiah(part.price)}
       </p>
       {/* z-10 lifts the button above the card's stretched link. */}

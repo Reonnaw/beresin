@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { Card } from "@/components/ui/card";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { AddToCartButton } from "@/features/cart/components/add-to-cart-button";
 import { toCartProduct } from "@/features/cart/lib/cart";
 import { getDiagnosticIssues } from "@/features/diagnostic/services/diagnostic-service";
@@ -20,10 +21,10 @@ export async function SparePartDetail({ params }: { params: Promise<{ sku: strin
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <p className="font-mono text-xs uppercase tracking-wide text-muted">
+          <Eyebrow>
             {MODULE_LABELS[part.module_type]} · {part.sku}
-          </p>
-          <h1 className="text-2xl font-semibold tracking-tight">{part.name}</h1>
+          </Eyebrow>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{part.name}</h1>
           {part.description && <p className="max-w-2xl text-muted">{part.description}</p>}
         </div>
 
@@ -50,10 +51,10 @@ export async function SparePartDetail({ params }: { params: Promise<{ sku: strin
 
       <Card className="flex h-fit flex-col gap-4 p-5">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-muted">Harga</span>
+          <span className="font-mono text-xs tracking-wide text-muted uppercase">Harga</span>
           <StockBadge stock={part.stock} />
         </div>
-        <p className="font-mono text-2xl font-semibold">{formatRupiah(part.price)}</p>
+        <p className="font-mono text-2xl font-semibold tabular-nums">{formatRupiah(part.price)}</p>
         <AddToCartButton product={toCartProduct(part)} />
       </Card>
     </div>

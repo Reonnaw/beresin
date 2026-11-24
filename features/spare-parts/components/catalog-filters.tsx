@@ -21,7 +21,7 @@ function FilterChip({ href, active, children }: { href: string; active: boolean;
       href={href}
       aria-current={active ? "true" : undefined}
       className={cn(
-        "rounded-[4px] border px-2.5 py-1 text-sm",
+        "rounded-sm border px-2.5 py-1 text-sm transition-colors",
         active
           ? "border-primary bg-primary text-primary-foreground"
           : "border-border bg-surface hover:bg-surface-muted",

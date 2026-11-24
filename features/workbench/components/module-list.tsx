@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { focusRing } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { cn } from "@/lib/cn";
 import { MODULE_LABELS, MODULE_TYPES } from "@/lib/constants/modules";
 import { useDiagnosticStore } from "@/stores/diagnostic-store";
@@ -17,8 +18,8 @@ export function ModuleList() {
 
   return (
     <section className="flex flex-col gap-2">
-      <h2 className="text-sm font-semibold">Modul</h2>
-      <ul className="divide-y divide-border rounded-[4px] border border-border">
+      <Eyebrow tone="muted">Modul</Eyebrow>
+      <ul className="divide-y divide-border rounded-sm border border-border">
         {MODULE_TYPES.map((type) => {
           const hidden = hiddenModules.includes(type);
           const selected = selectedModule === type;
