@@ -9,7 +9,7 @@ import { HARDWARE_MATERIALS } from "@/features/home/components/three/hardware-ma
 import { useScenePalette } from "@/hooks/use-scene-palette";
 import type { ModuleType } from "@/types/domain";
 
-export type PartProps = {
+type PartProps = {
   /** Hovered or selected: the body glows in the highlight token. */
   active: boolean;
   /** False under prefers-reduced-motion; only parts with moving pieces read it. */

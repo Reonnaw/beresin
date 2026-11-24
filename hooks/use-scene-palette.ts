@@ -29,7 +29,7 @@ const LIGHTING = {
   dark: { ambient: 0.45, key: 1.8, rim: 0.8 },
 } as const satisfies Record<ResolvedTheme, { ambient: number; key: number; rim: number }>;
 
-export type ScenePalette = SceneColors & { lighting: (typeof LIGHTING)[ResolvedTheme] };
+type ScenePalette = SceneColors & { lighting: (typeof LIGHTING)[ResolvedTheme] };
 
 function readSceneColors(): SceneColors {
   const style = getComputedStyle(document.documentElement);

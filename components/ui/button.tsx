@@ -16,8 +16,8 @@ const sizes = {
   lg: "h-11 px-5 text-sm",
 } as const;
 
-export type ButtonVariant = keyof typeof variants;
-export type ButtonSize = keyof typeof sizes;
+type ButtonVariant = keyof typeof variants;
+type ButtonSize = keyof typeof sizes;
 
 export const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";

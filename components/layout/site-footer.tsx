@@ -9,8 +9,9 @@ import { cn } from "@/lib/cn";
 
 /** Site map and the theme switcher, which the header hides on small screens to keep its row usable. */
 export function SiteFooter() {
+  // mt-auto pins the footer to the bottom on pages shorter than the viewport.
   return (
-    <footer className="border-t border-border bg-surface">
+    <footer className="mt-auto border-t border-border bg-surface">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 py-10 sm:grid-cols-[1fr_auto_auto] sm:items-start">
         <div className="flex flex-col gap-2">
           <BrandLink />
@@ -29,7 +30,7 @@ export function SiteFooter() {
             ))}
           </ul>
         </nav>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col items-start gap-2">
           <Eyebrow tone="muted">Tema</Eyebrow>
           <ThemeSwitcher />
         </div>

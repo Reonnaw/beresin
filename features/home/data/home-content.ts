@@ -15,7 +15,7 @@ export const HERO_CONTENT = {
   canvasHint: "Arahkan kursor ke komponen yang melayang, klik untuk detailnya.",
 } as const;
 
-export type HomeModule = {
+type HomeModule = {
   name: string;
   /** Shared prefix of this module's SKUs in the catalog. */
   skuPrefix: string;
@@ -75,7 +75,7 @@ export const HOME_MODULES = {
   },
 } as const satisfies Record<ModuleType, HomeModule>;
 
-export type WorkflowStep = {
+type WorkflowStep = {
   code: string;
   title: string;
   description: string;

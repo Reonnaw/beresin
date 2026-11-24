@@ -91,7 +91,7 @@ export default function HeroLaptopScene() {
 
       {/* CC BY requires naming the model's maker; only shown once their model is on screen. */}
       {model && modelReady && (
-        <p className="absolute inset-x-5 bottom-3 z-20 text-right font-mono text-[11px] text-muted lg:left-auto lg:max-w-md">
+        <p className="absolute inset-x-5 bottom-3 z-20 text-right font-mono text-2xs text-muted lg:left-auto lg:max-w-md">
           Model 3D{" "}
           <a href={model.viewerUrl} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-foreground">
             {model.name}

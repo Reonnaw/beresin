@@ -50,22 +50,33 @@ Dengan CLI yang sudah di-link: `supabase db push`, lalu jalankan `seed.sql`. Unt
 
 ```
 app/                       Route: page tetap tipis, hanya menyusun komponen fitur
-components/ui/             Primitive UI: Button, Badge, Card, Field
-components/layout/         Shell aplikasi: header, navigasi, page header
+components/ui/             Primitive UI: Button, Badge, Card, Field, Eyebrow, EmptyState, LoadingText, gaya link
+components/layout/         Shell aplikasi: header, footer, navigasi, page header
+components/theme/          Tema terang/gelap: token, script anti-flash, provider, switcher
+components/three/          Pencahayaan 3D bersama untuk semua kanvas
 features/<domain>/
   components/              Komponen fitur (home, workbench, diagnostic, spare-parts, cart, checkout, service, auth)
   components/three/        Objek 3D prosedural (beranda: pedestal, lantai grid, laptop, part melayang)
-  data/                    Konten statis beranda dan palet warna untuk material three.js
+  data/                    Konten statis beranda
   services/                Query Supabase sisi server (server-only)
   lib/                     Logika murni yang bisa dites
   actions.ts               Server Action
 stores/                    Zustand: workbench (3D), diagnosis, keranjang
-hooks/                     Hook bersama
+hooks/                     Hook bersama, termasuk useScenePalette untuk warna three.js
 lib/                       Format, konstanta, validasi, client Supabase, layanan Sketchfab
 types/                     Tipe skema Supabase dan tipe domain
 supabase/                  Migrasi SQL dan seed
 proxy.ts                   Refresh session Supabase di setiap request
 ```
+
+## Tema
+
+Light dan dark mode memakai CSS custom properties di `app/globals.css`, dipilih lewat `<html data-theme>`.
+
+- Pilihan pengguna (Terang, Gelap, Ikuti sistem) disimpan di `localStorage`. Script di `<head>` menerapkannya sebelum halaman tampil, jadi tidak ada kedipan tema saat reload.
+- Token mengikuti nama spesifikasi (`--bg-canvas`, `--text-primary`, `--accent-primary`, `--status-fault`, ...). Kelas Tailwind (`bg-surface`, `text-muted`, `text-danger`) memetakan ke token tersebut.
+- Warna aksen dan status dipakai apa adanya untuk isian, ring, dan aksen 3D. Teks memakai varian `-ink` yang lolos kontras 4.5:1; `components/theme/contrast.test.mjs` menjaga hal ini.
+- Kanvas 3D membaca token `--scene-*` lewat `useScenePalette`, sehingga grid, pedestal, cahaya, dan material ikut berganti tema. Warna fisik part (PCB, emas, tembaga) tetap.
 
 ## Konvensi
 

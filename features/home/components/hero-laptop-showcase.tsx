@@ -2,14 +2,15 @@
 
 import dynamic from "next/dynamic";
 
+import { LoadingText } from "@/components/ui/loading-text";
 import { LoadErrorBoundary } from "@/features/home/components/load-error-boundary";
 
 // WebGL needs the browser, so the scene is never prerendered.
 const HeroLaptopScene = dynamic(() => import("./hero-laptop-scene"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-full items-center justify-center font-mono text-xs text-muted">
-      Menyiapkan panggung 3D…
+    <div className="flex h-full items-center justify-center">
+      <LoadingText>Menyiapkan panggung 3D…</LoadingText>
     </div>
   ),
 });
