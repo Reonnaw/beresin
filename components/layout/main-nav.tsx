@@ -3,15 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { NAV_ITEMS } from "@/components/layout/nav-items";
 import { focusRing } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
-
-const NAV_ITEMS = [
-  { href: "/workbench", label: "Workbench" },
-  { href: "/spare-parts", label: "Spare Part" },
-  { href: "/service/book", label: "Booking Servis" },
-  { href: "/service/track", label: "Lacak Servis" },
-] as const;
 
 /** Pathname is request data, so the header renders <NavLinks pathname={null} /> until it resolves. */
 export function MainNav() {

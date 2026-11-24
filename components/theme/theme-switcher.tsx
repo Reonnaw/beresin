@@ -51,13 +51,13 @@ const OPTIONS = [
 ] as const satisfies readonly { value: ThemePreference; label: string; icon: ReactNode }[];
 
 /** Light, dark or system, as a native radio group so arrow keys and screen readers work for free. */
-export function ThemeSwitcher({ className }: { className?: string }) {
+export function ThemeSwitcher() {
   const preference = useThemePreference();
   // Unique per instance: header and footer both render a switcher, and a shared name would merge their groups.
   const name = useId();
 
   return (
-    <fieldset className={cn("inline-flex shrink-0 gap-0.5 rounded-sm border border-border bg-surface p-0.5", className)}>
+    <fieldset className="inline-flex shrink-0 gap-0.5 rounded-sm border border-border bg-surface p-0.5">
       <legend className="sr-only">Tema tampilan</legend>
       {OPTIONS.map((option) => (
         <label

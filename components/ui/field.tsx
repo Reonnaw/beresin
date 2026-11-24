@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 
 /** Base look for input, select and textarea. */
 export const inputStyles = cn(
-  "w-full rounded-[4px] border border-border bg-surface px-3 py-2 text-sm placeholder:text-muted aria-invalid:border-danger",
+  "w-full rounded-sm border border-border bg-surface px-3 py-2 text-sm placeholder:text-muted aria-invalid:border-danger",
   focusRing,
 );
 
