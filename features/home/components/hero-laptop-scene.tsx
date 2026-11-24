@@ -17,14 +17,8 @@ import { SketchfabLaptop } from "@/features/home/components/three/sketchfab-lapt
 import { useShowcaseModel } from "@/features/home/hooks/use-showcase-model";
 import type { Vec3 } from "@/features/workbench/lib/module-layout";
 
-/** Wide stages have copy over their top and bottom, so aim above the laptop to seat it below the headline. */
-const LOOK_AT_WIDE: Vec3 = [0, 2.2, 0];
-/** Narrow stages sit between the copy, so the laptop can take the middle. */
-const LOOK_AT_NARROW: Vec3 = [0, 1.6, 0];
-
-function lookAtFor(aspect: number): Vec3 {
-  return aspect >= 1.2 ? LOOK_AT_WIDE : LOOK_AT_NARROW;
-}
+/** Middle of the pedestal-and-parts group: no copy sits on the stage, so the camera aims straight at it. */
+const LOOK_AT: Vec3 = [0, 1.9, 0];
 
 /**
  * Pulls the camera back on narrow screens so the side parts stay in frame, up to where they would get too small.
@@ -35,16 +29,17 @@ function StageCamera({ orbit }: { orbit: boolean }) {
   const aspect = useThree((state) => state.size.width / state.size.height);
 
   useLayoutEffect(() => {
-    const distance = MathUtils.clamp(12 * Math.sqrt(1.7 / aspect), 12, 17);
+    // Wide, short stages can come closer: the parts spread sideways, not up.
+    const distance = MathUtils.clamp(12 * Math.sqrt(1.7 / aspect), 8.5, 17);
     camera.position.set(0, distance * 0.36, distance);
-    camera.lookAt(...lookAtFor(aspect));
+    camera.lookAt(...LOOK_AT);
   }, [aspect, camera]);
 
   if (!orbit) return null;
   return (
     <OrbitControls
       makeDefault
-      target={lookAtFor(aspect)}
+      target={LOOK_AT}
       enablePan={false}
       enableZoom={false}
       minPolarAngle={1}
@@ -91,7 +86,7 @@ export default function HeroLaptopScene() {
 
       {/* CC BY requires naming the model's maker; only shown once their model is on screen. */}
       {model && modelReady && (
-        <p className="absolute inset-x-5 bottom-3 z-20 text-right font-mono text-2xs text-muted lg:top-3 lg:bottom-auto lg:left-auto lg:max-w-md">
+        <p className="absolute inset-x-5 bottom-3 z-20 text-right font-mono text-2xs text-muted lg:left-auto lg:max-w-md">
           Model 3D{" "}
           <a href={model.viewerUrl} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-foreground">
             {model.name}

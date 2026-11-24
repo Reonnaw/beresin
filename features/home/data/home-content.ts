@@ -9,10 +9,13 @@ export const HERO_CONTENT = {
   eyebrow: "8 modul · bongkar pasang · tanpa tebak-tebakan",
   headline: "Bongkar laptopmu di layar dulu.",
   description:
-    "Putar model 3D, klik modul yang bermasalah, dan lihat perkiraan biayanya. Setelah itu beli spare part yang cocok atau booking teknisi, semuanya dari sini.",
-  primaryCta: { label: "Mulai Diagnostik 3D", href: "/workbench" },
-  secondaryCta: { label: "Katalog Spare Part", href: "/spare-parts" },
-  canvasHint: "Arahkan kursor ke komponen yang melayang, klik untuk detailnya.",
+    "Putar laptopnya, klik bagian yang bermasalah, dan lihat kisaran biaya sebelum membuka satu baut pun. Part yang cocok dan jadwal teknisi menunggu di langkah berikutnya.",
+  /** Console tiles under the stage, in the order a visitor would take them. */
+  actions: [
+    { tag: "01 · Workbench", label: "Mulai Diagnostik 3D", href: "/workbench", tone: "accent" },
+    { tag: "02 · Katalog", label: "Katalog Spare Part", href: "/spare-parts", tone: "surface" },
+  ],
+  canvasHint: "Arahkan kursor ke part yang melayang, klik untuk spesifikasinya.",
 } as const;
 
 type HomeModule = {
