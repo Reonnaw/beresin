@@ -30,6 +30,20 @@
   /* Solid primary buttons are ink-colored, so their label takes the opposite end of the scale. */
   --text-inverse: #ffffff;
   --text-on-accent: #14171f;
+
+  /* 3D scenes read these through useScenePalette, so canvases follow the theme with the page. */
+  --scene-background: var(--bg-canvas);
+  --scene-grid: #ddd6c7;
+  --scene-grid-major: #c8c0b0;
+  --scene-pedestal: var(--bg-subtle);
+  --scene-ring: var(--accent-primary);
+  --scene-ring-secondary: var(--accent-secondary);
+  --scene-chassis: #b9b3a6;
+  --scene-chassis-trim: #8e887c;
+  --scene-edge: var(--text-primary);
+  --scene-highlight: var(--accent-secondary);
+  --scene-select: var(--accent-primary);
+  --scene-fault: var(--status-fault);
 }
 
 /* Night bench: anodized slate, never pure black. */
@@ -52,6 +66,19 @@
   --status-fault-ink: #e87679;
   --text-inverse: #11141a;
   --text-on-accent: #11141a;
+
+  --scene-background: var(--bg-canvas);
+  --scene-grid: #222a38;
+  --scene-grid-major: var(--border-hairline);
+  --scene-pedestal: var(--bg-surface);
+  --scene-ring: var(--accent-primary);
+  --scene-ring-secondary: var(--accent-secondary);
+  --scene-chassis: #3a4152;
+  --scene-chassis-trim: #5b6478;
+  --scene-edge: var(--text-secondary);
+  --scene-highlight: var(--accent-secondary);
+  --scene-select: var(--accent-primary);
+  --scene-fault: var(--status-fault);
 }
 
 /* Tailwind names stay short (bg-surface, text-muted); each maps to one token above. */

@@ -3,8 +3,16 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
+import { SceneLights } from "@/components/three/scene-lights";
 import { LaptopAssembly } from "@/features/workbench/components/laptop-assembly";
+import { useScenePalette } from "@/hooks/use-scene-palette";
 import { useWorkbenchStore } from "@/stores/workbench-store";
+
+/** Cutting-mat grid in the same tokens as the homepage floor. */
+function BenchGrid() {
+  const palette = useScenePalette();
+  return <gridHelper args={[12, 24, palette.gridMajor, palette.grid]} position-y={-0.001} />;
+}
 
 export default function WorkbenchScene() {
   const selectModule = useWorkbenchStore((s) => s.selectModule);
@@ -15,12 +23,8 @@ export default function WorkbenchScene() {
       dpr={[1, 2]}
       onPointerMissed={() => selectModule(null)}
     >
-      <color attach="background" args={["#F5F4F0"]} />
-      <ambientLight intensity={0.7} />
-      <directionalLight position={[4, 6, 3]} intensity={1.6} />
-      <directionalLight position={[-4, 3, -2]} intensity={0.4} />
-      {/* Cutting-mat grid in the panel border and secondary surface tones. */}
-      <gridHelper args={[12, 24, "#D8D6CE", "#ECEAE2"]} position-y={-0.001} />
+      <SceneLights />
+      <BenchGrid />
 
       <LaptopAssembly />
 

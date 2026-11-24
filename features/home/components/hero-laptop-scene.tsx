@@ -5,6 +5,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { MathUtils } from "three";
 
+import { SceneLights } from "@/components/three/scene-lights";
 import { PartDetailCard } from "@/features/home/components/part-detail-card";
 import { CursorTilt } from "@/features/home/components/three/cursor-tilt";
 import { FloatingParts } from "@/features/home/components/three/floating-parts";
@@ -13,7 +14,6 @@ import type { FloatingModule } from "@/features/home/components/three/hardware-p
 import { Pedestal, PEDESTAL_TOP } from "@/features/home/components/three/pedestal";
 import { ProceduralLaptop } from "@/features/home/components/three/procedural-laptop";
 import { SketchfabLaptop } from "@/features/home/components/three/sketchfab-laptop";
-import { STAGE_PALETTE } from "@/features/home/data/stage-palette";
 import { useShowcaseModel } from "@/features/home/hooks/use-showcase-model";
 import type { Vec3 } from "@/features/workbench/lib/module-layout";
 
@@ -68,10 +68,7 @@ export default function HeroLaptopScene() {
   return (
     <div className="relative h-full">
       <Canvas camera={{ fov: 36 }} dpr={[1, 1.75]} onPointerMissed={() => setSelected(null)}>
-        <color attach="background" args={[STAGE_PALETTE.background]} />
-        <ambientLight intensity={0.45} />
-        <directionalLight position={[4, 8, 5]} intensity={1.8} />
-        <directionalLight position={[-6, 3, -4]} intensity={0.8} color={STAGE_PALETTE.signal} />
+        <SceneLights />
         <StageCamera orbit={finePointer} />
 
         <CursorTilt enabled={finePointer && animate}>
